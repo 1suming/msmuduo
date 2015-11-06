@@ -1,0 +1,9 @@
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+
+ipch
+
+*.opensdf
+*.sdf
