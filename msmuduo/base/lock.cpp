@@ -98,7 +98,7 @@ bool condition_var_t::wait(int ms)
 	return ret > 0;
 #else
 	timespec ts = { ms / (1000000), ms*(1000) };
-	return 0 == pthread_cond_timedwait(&m_cond, &m_lock.get_mutex(), &ts);
+	return 0 == pthread_cond_timedwait(&m_cond, &m_mutex.get_mutex(), &ts);
 #endif
 }
 

@@ -7,3 +7,10 @@ ipch
 
 *.opensdf
 *.sdf
+
+*.gch
+
+*.o
+*.a 
+lib/*
+

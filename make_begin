@@ -1,0 +1,13 @@
+compile_type = debug
+
+long_bit := $(shell getconf LONG_BIT)
+
+#µ±Ç°Ä¿Â¼
+cur_dir := $(shell pwd)
+
+
+lib_dir=${base_dir}/lib
+
+PCH_H= stdafx.h
+#PCH =stdafx.h.gch 
+

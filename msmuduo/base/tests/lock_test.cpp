@@ -2,6 +2,8 @@
 #include"../lock.h"
 #include"../Thread.h"
 
+#include<stdio.h>
+
 #include <boost/bind.hpp>
 #include<boost/ptr_container/ptr_vector.hpp>
 #include<queue>

@@ -90,6 +90,7 @@
 #include<iterator>
 #include<algorithm>
 
+#include<stdio.h>
 
 using namespace std;
 

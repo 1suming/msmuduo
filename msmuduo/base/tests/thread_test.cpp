@@ -4,32 +4,35 @@
 using namespace ms;
 void func1()
 {
-	printf("hello,%d", GetCurrentThreadId()); //¿ÉÒÔÔËĞĞ
+	 
 	printf("hello2,%d\n", CurrentThread::tid());
 	
 }
+#ifdef WIN
 static unsigned int __stdcall func2(void *)
 {
 	printf("\nfunc2\n");
 	return 1;
 }
+#endif
 int main()
 {
-	printf("main tid:%d,thread id:%d\n", CurrentThread::tid(), GetCurrentThreadId());
+	printf("main tid:%d,\n", CurrentThread::tid());
 
 	Thread t1(func1, "my");
 	
 	t1.start();
 
-	printf("\n tid:%d\n", t1.tid());
+	printf("\n tid:%d\n", t1.tid()); //linuxä¸‹ tid_å¯èƒ½æ¥ä¸åŠèµ‹å€¼è€Œè¾“å‡º0
 
 
 	t1.join();
 
-	printf("main tid:%d,thread id:%d\n", CurrentThread::tid(), GetCurrentThreadId());
+	printf("main tid:%d\n", CurrentThread::tid());
 
+	#ifdef WIN
 	HANDLE handle = (HANDLE)_beginthreadex(NULL, 0, func2, NULL, 0,NULL);
-
+	#endif
 	sleep(3000);
 
 }

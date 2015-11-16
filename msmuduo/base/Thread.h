@@ -20,7 +20,11 @@ using namespace std;
 
 namespace ms
 {
-
+ 
+namespace CurrentThread
+{
+	inline int tid();
+}
 class Thread : boost::noncopyable
 {
 public:
@@ -32,6 +36,7 @@ public:
 	static void* run_helper(void* arg)
 #endif
 	{
+		
 		Thread *t = (Thread*)arg;
 		t->run();
 		return NULL;
@@ -39,6 +44,7 @@ public:
 	}
 	void run()
 	{
+		tid_=CurrentThread::tid();//可能在调用时tid_还是0.
 		func_();
 	}
 	 
@@ -75,19 +81,19 @@ public:
 		//printf("%dyes\n",threadId_);
 		if (threadId_ == 0)
 		{
-			printf("failed to create thread!!!");
+			//printf("failed to create thread!!!");
 			return;
 		}
 			 
 		tid_ = thrdaddr;
 #else
-		if(0==::pthread_create(&threadId_,NULL,run,this))
+		if(0==::pthread_create(&threadId_,NULL,run_helper,this))
 		{
 
 		}
 		else
 		{
-			printf("failed to create thread!!!");
+			//printf("failed to create thread!!!");
 			return;
 		}
 

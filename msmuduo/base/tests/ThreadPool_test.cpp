@@ -1,5 +1,6 @@
 #include"../../stdafx.h"
 #include"../ThreadPool.h"
+#include"../CountDownLatch.h"
 
 #include <boost/bind.hpp>
 #include <stdio.h>
@@ -23,7 +24,7 @@ void test(int maxSize)
 	cout << "Test ThreadPool with max queue size = " << maxSize<<endl;
 	ThreadPool pool("MainThreadPool");
 	pool.setMaxQueueSize(maxSize);
-	pool.start(1);
+	pool.start(5);
 
 	cout << "Adding" << endl;
 
@@ -40,7 +41,11 @@ void test(int maxSize)
 	}
 	cout << "Done" << endl;
 	printf("\nqueueSize:%d\n", pool.queueSize());
-
+	
+	CountDownLatch latch(1);
+	pool.run(boost::bind(&CountDownLatch::countDown,&latch));
+	latch.wait();
+	
 	pool.stop();
 	printf("\nqueueSize:%d\n", pool.queueSize());
 
@@ -49,5 +54,8 @@ void test(int maxSize)
 int main()
 {
 	test(0);
-	//sleep(10000);
+	test(1);
+	test(5);
+	test(10);
+	test(50);
 }
