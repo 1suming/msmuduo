@@ -17,6 +17,9 @@
     <ClInclude Include="platform.h" />
     <ClInclude Include="base\ThreadPool.h" />
     <ClInclude Include="base\lock.h" />
+    <ClInclude Include="base\CountDownLatch.h" />
+    <ClInclude Include="base\AsyncLogging.h" />
+    <ClInclude Include="base\LogStream.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -27,5 +30,8 @@
     <ClCompile Include="base\tests\lock_test.cpp" />
     <ClCompile Include="base\tests\ThreadPool_test.cpp" />
     <ClCompile Include="base\tests\thread_test.cpp" />
+    <ClCompile Include="base\CountDownLatch.cpp" />
+    <ClCompile Include="base\AsyncLogging.cpp" />
+    <ClCompile Include="base\LogStream.cpp" />
   </ItemGroup>
 </Project>
