@@ -1,4 +1,4 @@
-#ifndef _Timestamp_h
+ï»¿#ifndef _Timestamp_h
 #define _Timestamp_h
 
 #include"Copyable.h"
@@ -66,7 +66,7 @@ public:
 	static const int kMicroSecondsPerSecond = 1000 * 1000;
 
 private:
-	int64_t microSecondsSinceEpoch_; //Epoch£¬ÐÂ¼ÍÔª GMTµÄ1970-01-01 00:00:00 +0000 (UTC)¡£
+	int64_t microSecondsSinceEpoch_; //Epochï¼Œæ–°çºªå…ƒ GMTçš„1970-01-01 00:00:00 +0000 (UTC)ã€‚
 
 };
 

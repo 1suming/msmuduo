@@ -1,11 +1,11 @@
-#include"../stdafx.h"
+﻿#include"../stdafx.h"
 #include"crossplatform.h"
 
 #ifdef WIN32 
 
 #include<winsock2.h>
 
-//windows�ж��壺
+//windows中定义：
 /*
 * Structure used in select() call, taken from the BSD file sys/time.h.
 */
