@@ -1,54 +1,18 @@
-#include"../stdafx.h"
-
-#include"Thread.h"
- 
-#ifdef WIN
-	#include <tlhelp32.h>
-#endif
-
 #ifndef WIN
-#include<sys/syscall.h>
-#include <errno.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <linux/unistd.h>
-#endif
+#include<windows.h>
+#include<tlhelp32.h>//CreateToolhelp32Snapshot
 
-namespace ms
+#include<iostream>
+using namespace std;
+
+
+DWORD WINAPI ThreadFun(LPVOID pM)
 {
-namespace CurrentThread
-{
-	threadlocal  int  t_cachedTid = 0;
-
-
-}
-namespace detail
-{
-	int gettid()
-	{
-#ifdef WIN
-		return GetCurrentThreadId();
-#else
-		return static_cast<int>(::syscall(SYS_gettid));
-#endif
-
-	}
+	printf("子线程的线程ID号为：%d\n子线程输出Hello World\n", GetCurrentThreadId());
+	Sleep(10 * 1000);
+	return 0;
 }
 
-boost::atomic_int Thread::numCreated_;
-
-
-void CurrentThread::cacheTid()
-{
-	if (t_cachedTid == 0)
-	{
-		t_cachedTid = detail::gettid();
-
-	}
-}
-
-#ifdef WIN 
 
 DWORD getMainThreadId()
 {
@@ -90,17 +54,26 @@ DWORD getMainThreadId()
 	::CloseHandle(hThreadSnap);
 	return m_threadId;
 }
-
-#endif
-
-bool CurrentThread::isMainThread()
+int main()
 {
-#ifdef WIN
-	return tid() == getMainThreadId();  //windows下GetCurrentProcessId()和主线程的id不是同一个
-#else
-	return tid() == ::getpid();
+	const DWORD pid = GetCurrentProcessId();
+
+	DWORD tid = GetCurrentThreadId();
+	cout << "pid:" << pid << endl;
+	cout << "tid:" << tid << endl;
+
+
+	HANDLE handle = CreateThread(NULL, 0, ThreadFun, NULL, 0, NULL);
+
+	cout << "main thread id:" << getMainThreadId() << endl;
+
+
+
+
+
+
+
+
+}
+
 #endif
-}
-
-
-}

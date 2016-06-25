@@ -170,7 +170,7 @@ namespace CurrentThread
 		return t_cachedTid;
 
 	}
-	//bool isMainThread();
+	bool isMainThread();
 }
 
 
