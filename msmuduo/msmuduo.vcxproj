@@ -82,15 +82,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="base\AsyncLogging.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="base\Copyable.h" />
     <ClInclude Include="base\CountDownLatch.h" />
     <ClInclude Include="base\crossplatform.h" />
     <ClInclude Include="base\minidump.h" />
     <ClInclude Include="base\lock.h" />
-    <ClInclude Include="base\LogFile.h" />
-    <ClInclude Include="base\LogStream.h" />
+    <ClInclude Include="base\LogFile.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="base\LogStream.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="base\StringPiece.h" />
     <ClInclude Include="base\ThreadPool.h" />
     <ClInclude Include="base\Timestamp.h" />
@@ -107,15 +111,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="base\AsyncLogging.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="base\Copyable.cpp" />
     <ClCompile Include="base\CountDownLatch.cpp" />
     <ClCompile Include="base\crossplatform.cpp" />
     <ClCompile Include="base\minidump.cpp" />
     <ClCompile Include="base\lock.cpp" />
-    <ClCompile Include="base\LogFile.cpp" />
-    <ClCompile Include="base\LogStream.cpp" />
+    <ClCompile Include="base\LogFile.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="base\LogStream.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="base\StringPiece.cpp" />
     <ClCompile Include="base\tests\lock_test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -123,13 +131,16 @@
     <ClCompile Include="base\tests\LogStream_test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="base\tests\minidump_test.cpp" />
+    <ClCompile Include="base\tests\minidump_test.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="base\tests\ThreadPool_test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="base\tests\thread_test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="base\tests\Timestamp_test.cpp" />
     <ClCompile Include="base\Thread.cpp" />
     <ClCompile Include="base\ThreadPool.cpp" />
     <ClCompile Include="base\Timestamp.cpp" />

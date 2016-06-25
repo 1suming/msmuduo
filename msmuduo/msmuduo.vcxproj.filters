@@ -49,5 +49,6 @@
     <ClCompile Include="base\tests\minidump_test.cpp" />
     <ClCompile Include="base\Timestamp.cpp" />
     <ClCompile Include="base\crossplatform.cpp" />
+    <ClCompile Include="base\tests\Timestamp_test.cpp" />
   </ItemGroup>
 </Project>

@@ -27,6 +27,8 @@
 		#undef WIN32_LEAN_AND_MEAN
 		#undef __UNDEF_LEAN_AND_MEAN
 	#endif
+
+	#include<winsock2.h> //≥£”√socket
 #else
 	#include <pthread.h>
 	#include <signal.h>

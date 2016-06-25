@@ -2,7 +2,7 @@
 
 #include"AsyncLogging.h"
 #include"LogFile.h"
-
+#include"Timestamp.h"
 
 NS_USING;
 

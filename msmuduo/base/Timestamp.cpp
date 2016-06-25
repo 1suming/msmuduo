@@ -1,5 +1,8 @@
 #include"../stdafx.h"
+
 #include"Timestamp.h"
+
+#include"crossplatform.h" //gettimeofday
 
 #include <stdio.h> //sprinf
 
@@ -22,7 +25,7 @@
 
 NS_USING;
 
-BOOST_STATIC_ASSERT(sizeof(Timestamp) == sizeof(int64_t));
+//BOOST_STATIC_ASSERT(sizeof(Timestamp) == sizeof(int64_t)); windows平台为16
 
 string Timestamp::toString() const
 {
@@ -40,9 +43,12 @@ string Timestamp::toFormattedString(bool showMicroseconds) const
 	time_t seconds = static_cast<time_t>(microSecondsSinceEpoch_ / kMicroSecondsPerSecond);
 	struct tm tm_time;
 #ifdef WIN
-	gmtime_s(&tm_time, &seconds);//thread-safe tm
+	//gmtime_s(&tm_time, &seconds);//thread-safe gmtime
+	localtime_s(&tm_time,&seconds); //localtime_r得到小时数会多8，因为china是+8区。同样建议使用localtime_r版本。
 #else
-	gmtime_r(&seconds, &tm_time); //linux下gmtime_r为可重入版本
+	//gmtime_r(&seconds, &tm_time); //linux下gmtime_r为可重入版本
+	localtime_s(&tm_time, &seconds); //localtime_r得到小时数会多8，因为china是+8区。同样建议使用localtime_r版本。
+
 #endif
 	if (showMicroseconds)
 	{
