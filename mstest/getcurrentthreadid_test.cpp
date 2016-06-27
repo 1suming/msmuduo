@@ -9,7 +9,7 @@ using namespace std;
 DWORD WINAPI ThreadFun(LPVOID pM)
 {
 	printf("子线程的线程ID号为：%d\n子线程输出Hello World\n", GetCurrentThreadId());
-	Sleep(10 * 1000);
+	Sleep(1000 * 1000);
 	return 0;
 }
 
