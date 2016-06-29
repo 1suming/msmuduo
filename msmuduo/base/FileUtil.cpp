@@ -6,8 +6,14 @@
 #include<errno.h>
 #include<assert.h>
 #include<stdio.h>//setbuffer
+#ifdef WIN
+#include<tchar.h> //_T
+#endif
  
+#ifdef LINUX 
+	#include<sys/stat.h>
 
+#endif
 NS_USING;
 
 
@@ -156,4 +162,22 @@ string FileUtil::getFileNameNotExtFromPath(const char* filePath)
 string FileUtil::getFileNameNotExtFromPath(const string& filePath)
 {
 	return getFileNameNotExtFromPath(filePath.c_str());
+}
+bool FileUtil::fileExist(const char* filePath)
+{
+#ifdef WIN 
+ 
+	DWORD attr = GetFileAttributes(filePath); 
+
+	if (attr == INVALID_FILE_ATTRIBUTES)
+		return false;
+	return true;
+
+#else
+	if (!access(filePath),F_OK)
+	{
+		return true;
+	}
+	return false;
+#endif
 }

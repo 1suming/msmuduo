@@ -51,6 +51,7 @@ namespace FileUtil
 	string getFileNameNotExtFromPath(const char* filePath);
 	string getFileNameNotExtFromPath(const string& filePath);
 
+	bool fileExist(const char* filePath);
 
 
 }

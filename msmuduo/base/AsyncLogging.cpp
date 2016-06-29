@@ -66,7 +66,7 @@ void AsyncLogging::threadFunc()
 	assert(running_ == true);
 	latch_.countDown();
 
-	LogFile output(basename_, rollSize_, false); //这里的传入的threadsafe为false
+	LogFile output(basename_, rollSize_, false); //Important 这里的传入的threadsafe为false，为什么，因为异步本身就保证了线程安全
 	BufferPtr newBuffer1(new Buffer);
 	BufferPtr newBuffer2(new Buffer);
 

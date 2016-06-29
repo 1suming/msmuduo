@@ -26,6 +26,8 @@
     <ClInclude Include="base\crossplatform.h" />
     <ClInclude Include="base\Logging.h" />
     <ClInclude Include="base\FileUtil.h" />
+    <ClInclude Include="base\endiantool.h" />
+    <ClInclude Include="base\sockettool.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -55,5 +57,10 @@
     <ClCompile Include="base\tests\LogFile_test.cpp" />
     <ClCompile Include="base\tests\FileUtil_test.cpp" />
     <ClCompile Include="base\tests\Logging_test.cpp" />
+    <ClCompile Include="base\endiantool.cpp" />
+    <ClCompile Include="base\tests\endiantool_test.cpp" />
+    <ClCompile Include="base\sockettool.cpp" />
+    <ClCompile Include="net\tests\Buffer_unittest.cc" />
+    <ClCompile Include="net\tests\Buffer_test.cpp" />
   </ItemGroup>
 </Project>
