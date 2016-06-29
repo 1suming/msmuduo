@@ -63,7 +63,7 @@ public:
 		return Timestamp(static_cast<int64_t>(t)* kMicroSecondsPerSecond + microseconds);
 	}
 
-	static const int kMicroSecondsPerSecond = 1000 * 1000;
+	static const int kMicroSecondsPerSecond = 1000 * 1000; //microseconds:微秒 ，milliseconds:毫秒
 
 private:
 	int64_t microSecondsSinceEpoch_; //Epoch，新纪元 GMT的1970-01-01 00:00:00 +0000 (UTC)。

@@ -1,6 +1,7 @@
 #include"../stdafx.h"
 
 #include"Thread.h"
+#include<boost/static_assert.hpp>
  
 #ifdef WIN
 	#include <tlhelp32.h>
@@ -20,6 +21,11 @@ namespace ms
 namespace CurrentThread
 {
 	threadlocal  int  t_cachedTid = 0;
+	threadlocal char t_tidString[32];
+	threadlocal int t_tidStringLength = 6;
+	threadlocal const char* t_threadName = "unknown";
+	 
+
 
 
 }
@@ -44,6 +50,8 @@ void CurrentThread::cacheTid()
 	if (t_cachedTid == 0)
 	{
 		t_cachedTid = detail::gettid();
+		t_tidStringLength = snprintf(t_tidString, sizeof t_tidString, "%5d ", t_cachedTid);
+
 
 	}
 }

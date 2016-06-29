@@ -49,7 +49,7 @@ private:
 	time_t lastFlush_;
 	boost::scoped_ptr<FileUtil::AppendFile> file_;
 
-	const static int kRollPerSeconds_ = 60 * 60 * 24;
+	const static int kRollPerSeconds_ = 60 * 60 * 24; //一天的时间：86400
 
 };
 

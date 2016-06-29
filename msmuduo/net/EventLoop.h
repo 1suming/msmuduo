@@ -1,13 +1,17 @@
 #ifndef _EventLoop_h
 #define _EventLoop_h
 
+#include"../base/Thread.h"
+#include"../base/Timestamp.h"
+#include"../base/lock.h"
+
 #include <boost/noncopyable.hpp>
 #include<boost/function.hpp>
 #include<boost/bind.hpp>
+#include<boost/scoped_ptr.hpp>
+#include<boost/any.hpp>
 
- 
-namespace ms
-{ 
+NS_BEGIN
 class Channel;
 class Poller;
 
@@ -20,7 +24,22 @@ class EventLoop : boost::noncopyable
 public:
 	typedef boost::function<void()> Functor;
 
-	EventLoop();
+	EventLoop() :
+		looping_(false),
+		quit_(false),
+		eventHandling_(false),
+		callingPendingFunctors_(false),
+		iterator_(0),
+		threadId_(CurrentThread::tid()),
+
+
+
+		currentActiveChannel(NULL)
+	{
+		
+		if (t_loop)
+	}
+		
 	~EventLoop();
 
 	//被调用必须和创建时的线程一样
@@ -47,11 +66,45 @@ public:
 	}
 	bool isInLoopThread()const { return threadId_ == CurrentThread::tid(); }
 
+	static EventLoop* getEventLoopOfCurrentThread();
+
 private:
+	void abortNotInLoopThread();
+	void handleRead();//wake up
+	void doPendingFunctors();
+
+	void printActiveChannels() const;//debug
+
+private:
+
+	typedef std::vector<Channel*> ChannelList;
+
+	bool looping_;//atomic
+	bool quit_; //  /* atomic and shared between threads, okay on x86, I guess. */
+	bool eventHandling_; //atomic
+	bool callingPendingFunctors_; //atomic
+
+	int64_t iterator_;
+	const THANDLE threadId_;
+
+	Timestamp pollReturnTime_;
+	boost::scoped_ptr<Poller> poller_;
+	//boost::scoped_ptr<TimerQueue> timerQueue_;
+
+	int wakeupFd_;
+
+	boost::scoped_ptr<Channel> wakeupChannel_;
+	boost::any context_;
+
+	ChannelList activeChannels_;
+	Channel* currentActiveChannel;
+
+	
+	mutex_t mutex_;
+	std::vector<Functor> pendingFunctors_;//@Guarded By mutex_
 
 };
 
 
-}//end namespace
-
+NS_END
 #endif

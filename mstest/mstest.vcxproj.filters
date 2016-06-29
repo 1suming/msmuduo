@@ -42,9 +42,18 @@
     <ClCompile Include="select_client.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="va_list.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="socketpair.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LessThanCompare.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="socketpair.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

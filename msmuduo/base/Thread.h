@@ -159,6 +159,11 @@ namespace CurrentThread
 {
 	//internal 
 	extern threadlocal  int t_cachedTid;
+	extern threadlocal char t_tidString[32];
+	extern threadlocal int t_tidStringLength;
+	extern threadlocal const char* t_threadName;
+
+
 	void cacheTid();
 
 	inline int tid()
@@ -171,6 +176,21 @@ namespace CurrentThread
 
 	}
 	bool isMainThread();
+
+	inline const char* tidString() // for logging
+	{
+		return t_tidString;
+	}
+
+	inline int tidStringLength() // for logging
+	{
+		return t_tidStringLength;
+	}
+
+	inline const char* name()
+	{
+		return t_threadName;
+	}
 }
 
 

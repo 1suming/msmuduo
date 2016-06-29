@@ -35,7 +35,7 @@ public:
 	{
 		running_ = true;
 		thread_.start();
-		latch_.wait();
+		latch_.wait(); //这里wait是为了让thread创建完成，
 
 	}
 	void stop()

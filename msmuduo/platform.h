@@ -93,6 +93,7 @@
 #include<algorithm>
 
 #include<stdio.h>
+#include <string.h> //strerror
 
 using namespace std;
 
