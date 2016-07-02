@@ -1,5 +1,8 @@
-#include"../stdafx.h"
+#include"stdafx.h"
 #include"Buffer.h"
+#include"base/sockettool.h"
+#include"base/Logging.h"
+#include<iostream>
 
 NS_USING;
 
@@ -15,9 +18,10 @@ ssize_t Buffer::readFd(int fd, int* savedErrno)
 
 #ifdef WIN
 
-	
+	/* 下面的是有recv，效率不过WSARecv，类似linux下面的readv
 	const size_t writable=writableBytes();
 
+	int retReadCnt=0;
 	int nread = 0;
 	//receive ，不保证一次性读完
 	while (true)//这里只是为了WSAEWOULDBLOCK时循环
@@ -45,13 +49,91 @@ ssize_t Buffer::readFd(int fd, int* savedErrno)
 		}
 		else
 		{
+			retReadCnt += nread;
 			writerIndex_ += nread;
 			break;
 		}
 	}
 	 
 
-	return nread;
+	return retReadCnt;
+	*/
+	//WSARecv https://msdn.microsoft.com/zh-cn/library/ms741688(en-us,VS.85).aspx
+	/*
+	int WSARecv(
+	__in          SOCKET s,
+	__in_out      LPWSABUF lpBuffers,
+	__in          DWORD dwBufferCount,
+	__out         LPDWORD lpNumberOfBytesRecvd,
+	__in_out      LPDWORD lpFlags,
+	__in          LPWSAOVERLAPPED lpOverlapped,
+	__in          LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine
+	*/
+
+	char extrabuf[65536];
+	const size_t writable = writableBytes();
+
+ 	WSABUF wsabuf[2];
+	DWORD recvBytes, flags;
+	flags = 0;
+
+	wsabuf[0].buf=begin()+writerIndex_ ;
+	wsabuf[0].len=writable;
+	wsabuf[1].buf=extrabuf;
+	wsabuf[1].len=sizeof extrabuf;
+
+	int retReadCnt = 0;
+	int nread = 0;
+	int rc;
+	while (1)
+	{
+		//cout << endl << "_____" << endl;
+		rc = WSARecv(fd, wsabuf, 2, &recvBytes, &flags, NULL, NULL);
+		//cout << endl << "bbbbbbb"<<"rc:"<<rc<<",recvg"<<recvBytes << endl;
+		sleep(10 * 100);
+		if (rc < 0) //#define SOCKET_ERROR            (-1)
+		{
+			int err = WSAGetLastError();
+			LOG_DEBUG << "err" << err << "," << getErrorMsg(err);
+			if (err == WSAEWOULDBLOCK)//一般是非阻塞或者异步SOCKET操作中，指定的操作不能立即完成，因此返回这个代码，经过试验，确实有errno:10035
+			{
+				continue;
+			}
+			if (err = WSAEINTR) //指定的操作执行中被一个高级调用中断，你可以继续执行，但是这一般在LINUX/UNIX中出现，WINDOWS上没见过
+			{
+				continue;
+			}
+			else
+			{
+				*savedErrno = WSAGetLastError();
+				break;
+			}
+		}
+		else
+		{
+		 
+			if (recvBytes <= writable)  //这里一定要判断
+			{
+				retReadCnt += recvBytes;
+				writerIndex_ += recvBytes;
+
+			}
+			else
+			{
+				writerIndex_ = buffer_.size();
+				append(extrabuf, recvBytes - writable);
+			}
+			
+			break;
+		}
+
+
+	}
+	return retReadCnt;
+	
+
+
+
 #else
 
 	//saved an ioctl()/FIONREAD call to tell how much to read

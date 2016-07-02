@@ -1,9 +1,11 @@
 #ifndef _EventLoop_h
 #define _EventLoop_h
 
-#include"../base/Thread.h"
-#include"../base/Timestamp.h"
-#include"../base/lock.h"
+#include"base/Thread.h"
+#include"base/Timestamp.h"
+#include"base/lock.h"
+#include"base/Logging.h"
+
 
 #include <boost/noncopyable.hpp>
 #include<boost/function.hpp>
@@ -24,21 +26,7 @@ class EventLoop : boost::noncopyable
 public:
 	typedef boost::function<void()> Functor;
 
-	EventLoop() :
-		looping_(false),
-		quit_(false),
-		eventHandling_(false),
-		callingPendingFunctors_(false),
-		iterator_(0),
-		threadId_(CurrentThread::tid()),
-
-
-
-		currentActiveChannel(NULL)
-	{
-		
-		if (t_loop)
-	}
+	EventLoop();
 		
 	~EventLoop();
 
@@ -85,7 +73,7 @@ private:
 	bool callingPendingFunctors_; //atomic
 
 	int64_t iterator_;
-	const THANDLE threadId_;
+	const int threadId_;
 
 	Timestamp pollReturnTime_;
 	boost::scoped_ptr<Poller> poller_;
@@ -97,7 +85,7 @@ private:
 	boost::any context_;
 
 	ChannelList activeChannels_;
-	Channel* currentActiveChannel;
+	Channel* currentActiveChannel_;
 
 	
 	mutex_t mutex_;

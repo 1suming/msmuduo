@@ -82,7 +82,7 @@ public:
 
 	const char* findEOL() const
 	{
-		const void* eol = memchr(peek(), '\n', readableBytes());
+		const void* eol = memchr(peek(), '\n', readableBytes()); //memchr :scan memory for a character
 		return static_cast<const char*>(eol);
 	}
 

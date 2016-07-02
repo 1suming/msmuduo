@@ -1,6 +1,6 @@
-#include"../../stdafx.h"
-#include"../AsyncLogging.h"
-#include"../Logging.h"
+#include"stdafx.h"
+#include"base/AsyncLogging.h"
+#include"base/Logging.h"
 #include<iostream>
  
 using namespace std;

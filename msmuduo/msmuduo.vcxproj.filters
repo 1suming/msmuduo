@@ -28,6 +28,8 @@
     <ClInclude Include="base\FileUtil.h" />
     <ClInclude Include="base\endiantool.h" />
     <ClInclude Include="base\sockettool.h" />
+    <ClInclude Include="net\poller\Select.h" />
+    <ClInclude Include="net\Acceptor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -62,5 +64,7 @@
     <ClCompile Include="base\sockettool.cpp" />
     <ClCompile Include="net\tests\Buffer_unittest.cc" />
     <ClCompile Include="net\tests\Buffer_test.cpp" />
+    <ClCompile Include="net\poller\Select.cpp" />
+    <ClCompile Include="net\Acceptor.cpp" />
   </ItemGroup>
 </Project>
