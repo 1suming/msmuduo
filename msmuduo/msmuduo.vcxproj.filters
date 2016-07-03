@@ -30,6 +30,7 @@
     <ClInclude Include="base\sockettool.h" />
     <ClInclude Include="net\poller\Select.h" />
     <ClInclude Include="net\Acceptor.h" />
+    <ClInclude Include="net\Poller.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -47,7 +48,6 @@
     <ClCompile Include="base\tests\LogStream_test.cpp" />
     <ClCompile Include="base\LogFile.cpp" />
     <ClCompile Include="net\Buffer.cpp" />
-    <ClCompile Include="base\Copyable.cpp" />
     <ClCompile Include="base\minidump.cpp" />
     <ClCompile Include="base\tests\minidump_test.cpp" />
     <ClCompile Include="base\Timestamp.cpp" />
@@ -66,5 +66,7 @@
     <ClCompile Include="net\tests\Buffer_test.cpp" />
     <ClCompile Include="net\poller\Select.cpp" />
     <ClCompile Include="net\Acceptor.cpp" />
+    <ClCompile Include="net\Poller.cpp" />
+    <ClCompile Include="net\poller\DefaultPoller.cpp" />
   </ItemGroup>
 </Project>

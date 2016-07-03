@@ -107,11 +107,12 @@
     <ClInclude Include="net\Buffer.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="net\Poller.h" />
     <ClInclude Include="net\poller\Select.h" />
     <ClInclude Include="platform.h" />
     <ClInclude Include="base\Thread.h" />
     <ClInclude Include="net\EventLoop.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="type.h" />
@@ -120,7 +121,6 @@
     <ClCompile Include="base\AsyncLogging.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="base\Copyable.cpp" />
     <ClCompile Include="base\CountDownLatch.cpp" />
     <ClCompile Include="base\crossplatform.cpp" />
     <ClCompile Include="base\endiantool.cpp" />
@@ -179,8 +179,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="net\EventLoop.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="net\Poller.cpp" />
+    <ClCompile Include="net\poller\DefaultPoller.cpp" />
     <ClCompile Include="net\poller\Select.cpp" />
     <ClCompile Include="net\tests\Buffer_test.cpp" />
     <ClCompile Include="net\tests\Buffer_unittest.cc">
