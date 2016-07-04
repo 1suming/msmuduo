@@ -20,6 +20,13 @@
     <ClInclude Include="base\CountDownLatch.h" />
     <ClInclude Include="base\AsyncLogging.h" />
     <ClInclude Include="base\LogStream.h" />
+    <ClInclude Include="base\StringPiece.h" />
+    <ClInclude Include="base\LogFile.h" />
+    <ClInclude Include="net\Buffer.h" />
+    <ClInclude Include="base\Copyable.h" />
+    <ClInclude Include="base\minidump.h" />
+    <ClInclude Include="base\Timestamp.h" />
+    <ClInclude Include="base\crossplatform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -33,5 +40,14 @@
     <ClCompile Include="base\CountDownLatch.cpp" />
     <ClCompile Include="base\AsyncLogging.cpp" />
     <ClCompile Include="base\LogStream.cpp" />
+    <ClCompile Include="base\StringPiece.cpp" />
+    <ClCompile Include="base\tests\LogStream_test.cpp" />
+    <ClCompile Include="base\LogFile.cpp" />
+    <ClCompile Include="net\Buffer.cpp" />
+    <ClCompile Include="base\Copyable.cpp" />
+    <ClCompile Include="base\minidump.cpp" />
+    <ClCompile Include="base\tests\minidump_test.cpp" />
+    <ClCompile Include="base\Timestamp.cpp" />
+    <ClCompile Include="base\crossplatform.cpp" />
   </ItemGroup>
 </Project>

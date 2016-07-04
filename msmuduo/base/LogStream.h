@@ -1,6 +1,7 @@
 #ifndef _LogStream_h
 #define _LogStream_h
 #include <boost/noncopyable.hpp>
+#include"StringPiece.h"
 
 NS_BEGIN
 
@@ -13,9 +14,9 @@ namespace detail
 	class FixedBuffer : boost::noncopyable
 	{
 	public:
-		FixedBuffer() :cur_(data)
+		FixedBuffer() :cur_(data_)
 		{
-			setCookie(cookieStart)
+			setCookie(cookieStart);
 		}
 		~FixedBuffer()
 		{
@@ -42,7 +43,7 @@ namespace detail
 		void add(size_t len) { cur_ += len; }
 
 		void reset() { cur_ = data_; }
-		void bzero() { ::bzero(data_, sizeof data_); }
+		void bzeroinit() { bzero(data_, sizeof data_); }
 
 		// for used by GDB
 		const char* debugString();
@@ -86,16 +87,17 @@ public:
 		return *this;
 
 	}
-	self& operator<<(int8_t v)
+	
+	self& operator<<(char v)
 	{
 		buffer_.append(&v, 1);
 		return *this;
 	}
-	self& operator<<(uint8_t v)
-	{
-		buffer_.append(&v, 1);
-		return *this;
-	}
+
+	// self& operator<<(signed char);
+	// self& operator<<(unsigned char);
+
+
 	self& operator<<(int16_t);
 	self& operator<<(uint16_t);
 	self& operator<<(int32_t);
@@ -103,6 +105,7 @@ public:
 	self& operator<<(int64_t);
 	self& operator<<(uint64_t);
 
+	//pointer
 	self& operator<<(const void*);
 
 	self& operator<< (float v)
@@ -136,12 +139,37 @@ public:
 		}
 		return *this;
 	}
-	self& ope
+	self& operator<<(const unsigned char* str)
+	{
+		return operator<<(reinterpret_cast<const char*>(str));
+	}
+
+	self& operator<<(const string& v)
+	{
+		buffer_.append(v.c_str(), v.size());
+		return *this;
+	}
+
+ 
+
+	self& operator<<(const StringPiece& v)
+	{
+		buffer_.append(v.data(), v.size());
+		return *this;
+	}
+
+	self& operator<<(const Buffer& v)
+	{
+		*this << v.toStringPiece();
+		return *this;
+	}
+
+	void append(const char* data, int len) { buffer_.append(data, len); }
+	const Buffer& buffer() const { return buffer_; }
+	void resetBuffer() { buffer_.reset(); }
 
 
-
-
-
+ 
 	 
 private:
 
@@ -169,7 +197,6 @@ private:
 	char buf_[32];
 	int length_;
 };
-
 
 
 inline LogStream& operator<<(LogStream& s, const Fmt& fmt)

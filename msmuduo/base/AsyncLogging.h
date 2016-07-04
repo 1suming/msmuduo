@@ -62,11 +62,11 @@ private:
 	string basename_;
 	size_t rollSize_;
 
-	ms::Thread thread_;
-	ms::CountDownLatch latch_;
+	Thread thread_;
+	CountDownLatch latch_;
 
-	ms::mutex_t mutex_;
-	ms::condition_var_t cond_;
+	mutex_t mutex_;
+	condition_var_t cond_;
 
 	BufferPtr currentBuffer_;
 	BufferPtr nextBuffer_;
