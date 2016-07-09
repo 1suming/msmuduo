@@ -103,7 +103,7 @@ extern Logger::LogLevel g_logLevel; //声明 ,外部变量
 //
 
 
-#define LOG_TRACE if(Logger::logLevel() <= Logger::TRACE ) \
+#define LOG_TRACE  if(Logger::logLevel() <= Logger::TRACE ) \
 	Logger(__FILE__, __LINE__, Logger::TRACE, _FUNC_).stream()  //返回LogStream 每次都新建一个临时对象，析构时调用flush
 
 #define LOG_DEBUG if(Logger::logLevel()<=Logger::DEBUG) \
@@ -124,12 +124,35 @@ extern Logger::LogLevel g_logLevel; //声明 ,外部变量
 	Logger(__FILE__, __LINE__, Logger::FATAL, _FUNC_).stream()
 
 
+
+
+
 //logLevel不应该放在.cpp文件中，否则链接时使用lOG_DEBUG出：现logLevel无法解析的外部符号 "  
 
 inline Logger::LogLevel Logger::logLevel()
 {
 	return g_logLevel;
 }
+
+
+#define CHECK_NOTNULL(val) \
+	CheckNotNull(__FILE__, __LINE__, "'" #val "' Must be non NULL", (val))
+
+
+
+
+// A small helper for CHECK_NOTNULL().
+template <typename T>
+T* CheckNotNull(string filename, int line, const char *names, T* ptr)
+{
+	if (ptr == NULL)
+	{
+		Logger(filename, line, Logger::FATAL,_FUNC_).stream() << names;
+	}
+	return ptr;
+}
+
+
 
 NS_END
 #endif

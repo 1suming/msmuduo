@@ -85,7 +85,7 @@ ssize_t Buffer::readFd(int fd, int* savedErrno)
 	int retReadCnt = 0;
 	int nread = 0;
 	int rc;
-	while (1)
+	//while (1)
 	{
 		//cout << endl << "_____" << endl;
 		rc = WSARecv(fd, wsabuf, 2, &recvBytes, &flags, NULL, NULL);
@@ -94,19 +94,19 @@ ssize_t Buffer::readFd(int fd, int* savedErrno)
 		if (rc < 0) //#define SOCKET_ERROR            (-1)
 		{
 			int err = WSAGetLastError();
+			*savedErrno = WSAGetLastError();
 			LOG_DEBUG << "err" << err << "," << getErrorMsg(err);
 			if (err == WSAEWOULDBLOCK)//一般是非阻塞或者异步SOCKET操作中，指定的操作不能立即完成，因此返回这个代码，经过试验，确实有errno:10035
 			{
-				continue;
+				//continue; 不用循环，会一直循环
 			}
 			if (err = WSAEINTR) //指定的操作执行中被一个高级调用中断，你可以继续执行，但是这一般在LINUX/UNIX中出现，WINDOWS上没见过
 			{
-				continue;
+				//continue;
 			}
 			else
 			{
-				*savedErrno = WSAGetLastError();
-				break;
+ 				//break;
 			}
 		}
 		else
@@ -124,7 +124,7 @@ ssize_t Buffer::readFd(int fd, int* savedErrno)
 				append(extrabuf, recvBytes - writable);
 			}
 			
-			break;
+			//break;
 		}
 
 
@@ -150,10 +150,13 @@ ssize_t Buffer::readFd(int fd, int* savedErrno)
 
 	const int iovcnt = (writable < sizeof extrabuf) ? 2 : 1;
 	const ssize_t n = ::readv(fd, vec, iovcnt);
+	/*
+	为什么没有反复调用read直到返回EAGAIN，因为采用的是level trigger
+	*/
 	//下面没有考虑=0的情况
 	if (n < 0)
 	{
-		*savedErrno=errno;
+		*savedErrno=errno; 
 	}
 	else if(implicit_cast<size_t>(n)<=writable)
 	{

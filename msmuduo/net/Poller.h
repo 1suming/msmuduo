@@ -49,8 +49,8 @@ public:
 
 
 protected:
-	typedef std::map<int, Channel*> ChannelMap;
-	ChannelMap channels_;
+	typedef std::map<int, Channel*> ChannelMap;//Channel->fd()作为key
+	ChannelMap channels_; //保存fd到Channel的映射
 
 private:
 	EventLoop* ownerLoop_;

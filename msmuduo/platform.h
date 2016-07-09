@@ -29,6 +29,7 @@
 	#endif
 
 	#include<winsock2.h> //常用socket
+    #include<WS2tcpip.h> // WS2TCPIP.H - WinSock2 Extension for TCP/IP protocols 例如：socklen_t
 #else
 	#include <pthread.h>
 	#include <signal.h>
@@ -60,6 +61,29 @@
 	#include<pthread.h>
 
 	#define nullptr NULL
+#endif
+
+
+//套接字网络
+#ifdef WIN 
+/*
+vs中：warning C4005: “FD_SETSIZE”: 宏重定义
+*/
+#ifdef WIN
+  #pragma warning(disable:4005)
+#endif
+	#define FD_SETSIZE 1024
+#ifdef WIN
+	#pragma warning(default:4005) //将报警置为默认,使用enable无效
+#endif
+
+
+
+	#define SHUT_RD SD_RECEIVE
+	#define SHUT_WR SD_SEND
+	#define SHUT_RDWR SD_BOTH
+#else 
+
 #endif
 
 // 线程局部存储

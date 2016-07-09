@@ -17,11 +17,15 @@ Poller* Poller::newDefaultPoller(EventLoop* loop)
 #if defined NETMODEL_USE_SELECE
 
 #elif defined NETMODEL_USE_POLL
-	 
+	return new PollPoller(loop);
+
 #else 
 	#ifdef WIN
 		#define NETMODEL_USE_POLL
 		
+		return new PollPoller(loop);
+		
+
 	#else
 		#define NETMODEL_USE_EPOLL
 	#endif

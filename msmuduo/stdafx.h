@@ -16,7 +16,7 @@
 
 #include"type.h"
 #include"platform.h"
-
+#include<assert.h>
 #ifdef WIN
 	#define snprintf _snprintf
 #endif

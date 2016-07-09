@@ -31,6 +31,14 @@
     <ClInclude Include="net\poller\Select.h" />
     <ClInclude Include="net\Acceptor.h" />
     <ClInclude Include="net\Poller.h" />
+    <ClInclude Include="net\poller\PollPoller.h" />
+    <ClInclude Include="net\Channel.h" />
+    <ClInclude Include="net\Socket.h" />
+    <ClInclude Include="net\InetAddress.h" />
+    <ClInclude Include="net\TcpServer.h" />
+    <ClInclude Include="net\TcpConnection.h" />
+    <ClInclude Include="net\Callbacks.h" />
+    <ClInclude Include="base\Atomic.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -68,5 +76,12 @@
     <ClCompile Include="net\Acceptor.cpp" />
     <ClCompile Include="net\Poller.cpp" />
     <ClCompile Include="net\poller\DefaultPoller.cpp" />
+    <ClCompile Include="net\poller\PollPoller.cpp" />
+    <ClCompile Include="net\Channel.cpp" />
+    <ClCompile Include="net\Socket.cpp" />
+    <ClCompile Include="net\InetAddress.cpp" />
+    <ClCompile Include="net\TcpServer.cpp" />
+    <ClCompile Include="net\TcpConnection.cpp" />
+    <ClCompile Include="net\tests\TcpServer_test1.cpp" />
   </ItemGroup>
 </Project>
