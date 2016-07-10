@@ -68,10 +68,11 @@ EventLoop::EventLoop():
 	{
 		LOG_FATAL << "EventLoop constructor socketPairResult error";
 	}
+	assert(wakeUpFd1SetNonBlocking_ == 0 && wakeUpFd2SetNonBlocking_ == 0);
 	 
 #endif
-	 
 
+ 
 	LOG_DEBUG << "EventLoop created " << this << " in thread " << threadId_;
 
 	if (t_loopInThisThread)
@@ -88,7 +89,7 @@ EventLoop::EventLoop():
 		boost::bind(&EventLoop::handleRead, this));
 
 	//we are always reading the wakeupfd
-	wakeupChannel_->enableReading(); //channel enable和disable都会调用update
+	wakeupChannel_->enableReading(); //channel enable和disable都会调用update(),update()会调用Loop->update，然后调用poller->update
 
 
 }

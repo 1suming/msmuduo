@@ -18,7 +18,7 @@ threadlocal time_t t_lastSecond;
 //全局函数，返回一个enum LogLevel
 Logger::LogLevel  initLogLevel()
 {
-	return Logger::INFO;
+	return Logger::DEBUG; //一般正式环境定义成Logger::INFO
 }
 
 

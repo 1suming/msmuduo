@@ -246,7 +246,7 @@ namespace sockettool
 
 	int createNonblockingOrDie()
 	{
-		int sockfd = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+		int sockfd = ::socket(AF_INET, SOCK_STREAM, 0);
 		if (sockfd < 0)
 		{
 			LOG_FATAL << "socket::createNonblockingOrDie";

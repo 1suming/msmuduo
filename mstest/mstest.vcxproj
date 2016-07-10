@@ -82,7 +82,9 @@
     <ClCompile Include="bind_function_test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="CString_test.cpp" />
+    <ClCompile Include="CString_test.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="getcurrentthreadid_test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -116,13 +118,14 @@
     <ClCompile Include="va_list.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="globalsock.cpp" />
     <ClCompile Include="WSAPoll_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CString.h" />
     <ClInclude Include="LessThanCompare.h" />
     <ClInclude Include="socketpair.h" />
-    <ClInclude Include="winsock.h" />
+    <ClInclude Include="globalsock.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

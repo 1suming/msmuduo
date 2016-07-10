@@ -26,6 +26,8 @@ void newConnection(int sockfd, const InetAddress& peerAddr)
 int main()
 {
   
+	 Logger::setLogLevel(Logger::TRACE);
+
 	 InetAddress listenAddr(9981);
 	 EventLoop loop;
 

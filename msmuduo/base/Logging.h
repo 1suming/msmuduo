@@ -103,6 +103,13 @@ extern Logger::LogLevel g_logLevel; //声明 ,外部变量
 //
 
 
+enum ECHO_COLOR{
+	COLOR_DEFAULT,
+	COLOR_RED,
+	COLOR_GREEN,
+	COLOR_YELLOW
+};
+
 #define LOG_TRACE  if(Logger::logLevel() <= Logger::TRACE ) \
 	Logger(__FILE__, __LINE__, Logger::TRACE, _FUNC_).stream()  //返回LogStream 每次都新建一个临时对象，析构时调用flush
 

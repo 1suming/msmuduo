@@ -24,6 +24,11 @@ Timestamp PollPoller::poll(int timeoutMs, ChannelList* activeChannels) //vector<
 	POLLRDBAND	Priority band (out-of-band) data may be read without blocking.
 	POLLRDNORM	Normal data may be read without blocking.
 	POLLWRNORM	Normal data may be written without blocking.
+	最开始用WSAPoll
+	总是报10022错误
+	WSAEINVAL                           (10022)             Invalid argument.
+	提供了非法参数（例如，在使用setsockopt()函数时指定了非法的level）。在一些实例中，它也可能与套接字的当前状态相关，例如，在套接字没有使用listen()使其处于监听时调用accept()函数。
+	最后找到原因了，原来是开启读事件用了：kReadEvent = POLLIN | POLLPRI; POLLPRI这个虽然在windows定义了，但windows里明确第说明了不支持这个。
 	
 	*/
  	int numEvents = ::WSAPoll(&*pollfds_.begin(), pollfds_.size(), timeoutMs);

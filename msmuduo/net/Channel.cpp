@@ -29,8 +29,15 @@ WSAPOLL 有定义POLLIN和POLLOUT
 */
 
 const int Channel::kNoneEvent = 0;
-
+#ifdef LINUX 
 const int Channel::kReadEvent = POLLIN | POLLPRI;
+#else 
+/*
+如果windows下用了POLLPRI，就会包 WSAEINVAL    (10022)  错误，原因在于windows虽然定义了这个宏，但是不支持.（windows有明确的说明）
+POLLPRI	Priority data may be read without blocking. This flag is not supported by the Microsoft Winsock provider.
+*/
+const int Channel::kReadEvent = POLLIN;
+#endif
 const int Channel::kWriteEvent = POLLOUT;
  
 
@@ -92,11 +99,13 @@ void Channel::handleEvent(Timestamp receiveTime)
 			errorCallback_();
 	}
 	//if (revents_ & (POLLIN | POLLPRI | POLLRDHUP))
+	//!Importang:注意，不能用的elseif,而是用if, 
 	if (revents_ & (POLLIN | POLLPRI))
 	{
 		if (readCallback_)
 			readCallback_(receiveTime);
 	}
+	//用的是if，不是else if
 	if (revents_ & POLLOUT)
 	{
 		if (writeCallback_)
