@@ -257,7 +257,10 @@ namespace sockettool
 		return sockfd;
 
 	}
-
+	int  connect(int sockfd, const struct sockaddr_in& addr)
+	{
+		return ::connect(sockfd, sockaddr_cast(&addr), static_cast<socklen_t>(sizeof addr));
+	}
 	void listenOrDie(int sockfd)
 	{
 		int ret = ::listen(sockfd, SOMAXCONN);

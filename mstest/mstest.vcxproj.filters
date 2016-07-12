@@ -60,6 +60,9 @@
     <ClCompile Include="globalsock.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="shared_ptr_test.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LessThanCompare.h">

@@ -119,7 +119,11 @@ public:
 	{
 		if (started_ && !joined_)
 		{
-
+		#ifdef WIN
+			
+		#else 
+			pthread_detach(threadId_);
+		#endif
 		}
 	}
 

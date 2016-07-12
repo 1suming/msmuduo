@@ -61,7 +61,7 @@ TcpConnection::TcpConnection(EventLoop* loop,
 
 
 
-	LOG_DEBUG << "TcpConnection::ctor[" << name_ << "] at " << this
+	LOG_DEBUG << "TcpConnection::Constructor[" << name_ << "] at " << this
 		<< " fd=" << sockfd;
 
 	socket_->setKeepAlive(true);
@@ -70,7 +70,7 @@ TcpConnection::TcpConnection(EventLoop* loop,
 
 TcpConnection::~TcpConnection()
 {
-	LOG_DEBUG << "TcpConnection::dtor[" << name_ << "] at " << this
+	LOG_DEBUG << "TcpConnection::Destructor[" << name_ << "] at " << this
 		<< " fd=" << channel_->fd()
 		<< " state=" << state_;
 	assert(state_ == kDisconnected);//什么时候会把state改成kDisConnected
@@ -435,7 +435,7 @@ void TcpConnection::handleClose() //这个函数跟connectDestroy有类似
 	LOG_TRACE << "fd = " << channel_->fd() << " state = " << state_;
 
 	assert(state_ == kConnected || state_ == kDisconnecting);
-	// we don't close fd, leave it to dtor, so we can find leaks easily.
+	// we don't close fd, leave it to dtor, so we can find leaks easily.   
 
 	setState(kDisconnected);
 	channel_->disableAll();

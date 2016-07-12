@@ -79,7 +79,7 @@ void Channel::handleEvent(Timestamp receiveTime)
 	非法请求：fd未打开（output only）
 	*/
 	//POLLHUP描述符挂起
-	if ((revents_ & POLLHUP) && !(revents_ & POLLIN))
+	if ((revents_ & POLLHUP) && !(revents_ & POLLIN))//我在windows上按ctrl+c会引发POLLHUP 和POLLERR
 	{
 		if (logHup_)
 		{
@@ -93,7 +93,7 @@ void Channel::handleEvent(Timestamp receiveTime)
 	{
 		LOG_WARN << "fd = " << fd_ << " Channel::handleEvent() POLLNVAL";
 	}
-	if (revents_ & (POLLERR | POLLNVAL)) 
+	if (revents_ & (POLLERR | POLLNVAL))//windows上按ctrl+c会进入这里,执行errorCallback,得到的socketerror为0
 	{
 		if (errorCallback_)
 			errorCallback_();

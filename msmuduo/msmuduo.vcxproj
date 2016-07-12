@@ -115,8 +115,10 @@
     <ClInclude Include="net\poller\PollPoller.h" />
     <ClInclude Include="net\poller\Select.h" />
     <ClInclude Include="net\Socket.h" />
+    <ClInclude Include="net\TcpClient.h" />
     <ClInclude Include="net\TcpConnection.h" />
     <ClInclude Include="net\TcpServer.h" />
+    <ClInclude Include="net\Connector.h" />
     <ClInclude Include="platform.h" />
     <ClInclude Include="base\Thread.h" />
     <ClInclude Include="net\EventLoop.h">
@@ -187,6 +189,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="net\Channel.cpp" />
+    <ClCompile Include="net\Connector.cpp" />
     <ClCompile Include="net\EventLoop.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -196,6 +199,7 @@
     <ClCompile Include="net\poller\PollPoller.cpp" />
     <ClCompile Include="net\poller\Select.cpp" />
     <ClCompile Include="net\Socket.cpp" />
+    <ClCompile Include="net\TcpClient.cpp" />
     <ClCompile Include="net\TcpConnection.cpp" />
     <ClCompile Include="net\TcpServer.cpp" />
     <ClCompile Include="net\tests\Buffer_test.cpp">
@@ -204,7 +208,22 @@
     <ClCompile Include="net\tests\Buffer_unittest.cc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="net\tests\TcpServer_test1.cpp" />
+    <ClCompile Include="net\tests\Connector_test.cpp" />
+    <ClCompile Include="net\tests\TcpServer_test1.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="net\tests\TcpServer_test2_runinloop.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="net\tests\TcpServer_test_tcpserver.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="net\tests\TcpServer_test_tcpserver2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="net\tests\TcpServer_test_tcpserver3.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

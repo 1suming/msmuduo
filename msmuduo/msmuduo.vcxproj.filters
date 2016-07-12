@@ -39,6 +39,8 @@
     <ClInclude Include="net\TcpConnection.h" />
     <ClInclude Include="net\Callbacks.h" />
     <ClInclude Include="base\Atomic.h" />
+    <ClInclude Include="net\Connector.h" />
+    <ClInclude Include="net\TcpClient.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -83,5 +85,12 @@
     <ClCompile Include="net\TcpServer.cpp" />
     <ClCompile Include="net\TcpConnection.cpp" />
     <ClCompile Include="net\tests\TcpServer_test1.cpp" />
+    <ClCompile Include="net\tests\TcpServer_test2_runinloop.cpp" />
+    <ClCompile Include="net\tests\TcpServer_test_tcpserver.cpp" />
+    <ClCompile Include="net\tests\TcpServer_test_tcpserver2.cpp" />
+    <ClCompile Include="net\tests\TcpServer_test_tcpserver3.cpp" />
+    <ClCompile Include="net\Connector.cpp" />
+    <ClCompile Include="net\tests\Connector_test.cpp" />
+    <ClCompile Include="net\TcpClient.cpp" />
   </ItemGroup>
 </Project>

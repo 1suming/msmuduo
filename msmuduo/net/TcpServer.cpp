@@ -99,7 +99,7 @@ void TcpServer::newConnection(int sockfd, const InetAddress& peerAddr)
 		));
 
 
-	connections_[connName] = conn;
+	connections_[connName] = conn; //到这里conn的引用计数为2
 
 	conn->setConnectionCallback(connectionCallback_);
 	conn->setMessageCallback(messageCallback_);
@@ -117,7 +117,7 @@ void TcpServer::newConnection(int sockfd, const InetAddress& peerAddr)
 void TcpServer::removeConnection(const TcpConnectionPtr& conn)
 {
 	// FIXME: unsafe
-	loop_->runInLoop(boost::bind(&TcpServer::removeConnectionInLoop, this, conn));
+	loop_->runInLoop(boost::bind(&TcpServer::removeConnectionInLoop, this, conn));//这里很增加一次conn的引用计数
 }
 
 void TcpServer::removeConnectionInLoop(const TcpConnectionPtr& conn)
@@ -130,7 +130,7 @@ void TcpServer::removeConnectionInLoop(const TcpConnectionPtr& conn)
 	assert(n == 1);
 	EventLoop* ioLoop = conn->getLoop();
 	ioLoop->queueInLoop(
-		boost::bind(&TcpConnection::connectDestroyed, conn));
+		boost::bind(&TcpConnection::connectDestroyed, conn));//这里bind会增加引用计数
 }
 
 
