@@ -7,6 +7,7 @@
 #include"EventLoop.h"
 #include"net/Channel.h"
 #include"net/Poller.h"
+#include"net/TimerQueue.h"
 
 NS_USING;
  
@@ -47,7 +48,7 @@ EventLoop::EventLoop():
 	threadId_(CurrentThread::tid()),
 
 	poller_(Poller::newDefaultPoller(this)),
-	//timerQueue_(new TimerQueue(this)),
+	timerQueue_(new TimerQueue(this)),
 #ifdef LINUX 
 	wakupFd_(createEventfd()),
 	wakeupChannel_(new Channe(this,wakeupFd_)),
@@ -300,4 +301,31 @@ void EventLoop::printActiveChannels() const
 		const Channel* ch = *it;
 		LOG_TRACE << "{" << ch->reventsToString() << "} ";
 	}
+}
+
+/*-----------------------begin timers---------------------*/
+
+TimerId EventLoop::runAt(const Timestamp& time, const TimerCallback& cb)
+{
+	//:addTimer(const TimerCallback& cb, Timestamp when, double interval)
+	return timerQueue_->addTimer(cb, time, 0.0);
+
+}
+
+
+TimerId EventLoop::runAfter(double delay, const TimerCallback& cb)
+{
+	Timestamp time(addTime(Timestamp::now(), delay));
+	return runAt(time, cb);
+
+}
+TimerId EventLoop::runEvery(double interval, const TimerCallback& cb)
+{
+	Timestamp time(addTime(Timestamp::now(), interval));
+	return timerQueue_->addTimer(cb, time, interval);
+}
+void EventLoop::cancel(TimerId timerId)
+{
+	return timerQueue_->cancel(timerId);
+
 }

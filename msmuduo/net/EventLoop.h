@@ -5,7 +5,9 @@
 #include"base/Timestamp.h"
 #include"base/lock.h"
 #include"base/Logging.h"
+#include"net/TimerId.h"
 
+#include"net/Callbacks.h"
 
 #include <boost/noncopyable.hpp>
 #include<boost/function.hpp>
@@ -33,6 +35,7 @@ NS_BEGIN
 
 class Channel;
 class Poller;
+class TimerQueue;
 
 /*
 Reactor:at most one loop per thread
@@ -56,6 +59,30 @@ public:
 	//runInLoop和queueInLoop区别，runInLoop会判断调用的是否是loop线程，若是立即调用，否则调用queueInLoop走functors队列
 	void runInLoop(const Functor& cb);
 	void queueInLoop(const Functor& cb);
+
+	/*---------------------timers-----------------*/
+	///Run callbacks at 'time'
+	///Safe to call from other threads
+	TimerId runAt(const Timestamp& time, const TimerCallback& cb);
+
+
+	///Run callbak after @c delay seconds 
+	//safe to call from other threads
+	TimerId runAfter(double delay, const TimerCallback& cb);
+
+	///Run callback every @c interval seconds
+	///Safe to call from other threads
+	TimerId runEvery(double interval, const TimerCallback& cb);
+
+	///Cancels the timer
+	///Safe to call from other threads
+	void cancel(TimerId timerId);
+
+	/*-------------------end timers  --------------------------------*/
+
+
+
+
 
 	//internal usage
 	void wakeup();
@@ -96,7 +123,7 @@ private:
 
 	Timestamp pollReturnTime_;
 	boost::scoped_ptr<Poller> poller_;
-	//boost::scoped_ptr<TimerQueue> timerQueue_;
+	boost::scoped_ptr<TimerQueue> timerQueue_;
 
 #ifdef LINUX 
 	//线程间通信
@@ -110,6 +137,8 @@ private:
 
 	
 #endif
+	//unlike in TimerQueue, which is an internal class,
+	// we don't expose Channel to client.
 	boost::scoped_ptr<Channel> wakeupChannel_;
 	boost::any context_;
 

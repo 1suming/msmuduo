@@ -41,6 +41,9 @@
     <ClInclude Include="base\Atomic.h" />
     <ClInclude Include="net\Connector.h" />
     <ClInclude Include="net\TcpClient.h" />
+    <ClInclude Include="net\TimerQueue.h" />
+    <ClInclude Include="net\Timer.h" />
+    <ClInclude Include="net\TimerId.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -92,5 +95,12 @@
     <ClCompile Include="net\Connector.cpp" />
     <ClCompile Include="net\tests\Connector_test.cpp" />
     <ClCompile Include="net\TcpClient.cpp" />
+    <ClCompile Include="net\TimerQueue.cpp" />
+    <ClCompile Include="net\Timer.cpp" />
+    <ClCompile Include="net\tests\TimerQueue_test.cc" />
+    <ClCompile Include="net\tests\TcpClient_test1.cpp" />
+    <ClCompile Include="net\tests\TcpClient_test2.cpp" />
+    <ClCompile Include="net\tests\TcpClient_test3.cpp" />
+    <ClCompile Include="net\tests\TcpClient_testMy.cpp" />
   </ItemGroup>
 </Project>

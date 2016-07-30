@@ -19,5 +19,12 @@
 #include<assert.h>
 #ifdef WIN
 	#define snprintf _snprintf
+
+struct timespec {
+	/* long long in windows is the same as long in unix for 64bit */
+	long long tv_sec;
+	long long tv_nsec;
+
+};
 #endif
 #endif
