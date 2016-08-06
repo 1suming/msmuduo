@@ -1,8 +1,8 @@
 #ifndef _Callbacks_h
 #define _Callbacks_h
  
-#include"stdafx.h"
-#include"base/Timestamp.h"
+#include"msmuduo/stdafx.h"
+#include"msmuduo/base/Timestamp.h"
 
 
 #include <boost/function.hpp>

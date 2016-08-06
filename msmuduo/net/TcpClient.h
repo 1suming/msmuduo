@@ -5,9 +5,9 @@
 #include<boost/shared_ptr.hpp>
 #include<boost/bind.hpp>
 
-#include"base/lock.h"
-#include"net/TcpConnection.h"
-#include"net/Connector.h"
+#include"msmuduo/base/lock.h"
+#include"msmuduo/net/TcpConnection.h"
+#include"msmuduo/net/Connector.h"
 
 // This is a public header file, it must only include public header files.
 

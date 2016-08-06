@@ -42,7 +42,7 @@ namespace detail
 	}
 }
 
-boost::atomic_int Thread::numCreated_;
+AtomicInt32 Thread::numCreated_;
 
 
 void CurrentThread::cacheTid()

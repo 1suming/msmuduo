@@ -1,9 +1,9 @@
 #ifndef _TcpServer_h
 #define _TcpServer_h
 
-#include"TcpConnection.h"
-#include"Callbacks.h"
-#include"base/Atomic.h"
+#include"msmuduo/net/TcpConnection.h"
+#include"msmuduo/net/Callbacks.h"
+#include"msmuduo/base/Atomic.h"
 
 #include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
@@ -16,6 +16,7 @@ NS_BEGIN
 
 class Acceptor;
 class EventLoop;
+class EventLoopThreadPool;
 class InetAddress;
 
 
@@ -109,8 +110,8 @@ private:
 	const string hostport_;
 	const string name_;
 	boost::scoped_ptr<Acceptor> acceptor_;// avoid revealing Acceptor
-	//TODO
-	//boost::shared_ptr<EventLoopThreadPool> threadPool_;
+	
+	boost::shared_ptr<EventLoopThreadPool> threadPool_;
 
 	ConnectionCallback connectionCallback_; //callbacks.h中有定义
 	MessageCallback messageCallback_;

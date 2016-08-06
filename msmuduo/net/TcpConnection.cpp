@@ -1,13 +1,12 @@
-#include"stdafx.h"
-#include"TcpConnection.h"
+#include"msmuduo/stdafx.h"
+#include"msmuduo/net/TcpConnection.h"
 
 
-#include"base/Logging.h"
-#include"base/sockettool.h"
+#include"msmuduo/base/Logging.h"
+#include"msmuduo/base/sockettool.h"
 
-#include"net/Channel.h"
-#include"net/EventLoop.h"
-#include"net/Socket.h"
+#include"msmuduo/net/EventLoop.h"
+#include"msmuduo/net/Socket.h"
 
 
 #include<boost/bind.hpp>
@@ -291,7 +290,7 @@ void TcpConnection::shutdown()
 	//FIXME:use compare and swap
 	if (state_ == kConnected)
 	{
-		setState(kDisconnecting);
+		setState(kDisconnecting); //ÉèÖÃ×´Ì¬ÎªkDisconnecting
 		//FIXME:use shared_from_this
 		loop_->runInLoop(
 			boost::bind(&TcpConnection::shutdownInLoop, this));

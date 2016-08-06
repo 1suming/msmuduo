@@ -1,4 +1,4 @@
-#include"stdafx.h"
+#include"msmuduo/stdafx.h"
 #include"Channel.h"
 
 #include"base/Logging.h"
@@ -83,7 +83,7 @@ void Channel::handleEvent(Timestamp receiveTime)
 	{
 		if (logHup_)
 		{
-			LOG_WARN << "Channel::handleEvent)( POLLHUP";
+			LOG_WARN << "Channel::handleEvent() POLLHUP";
 		}
 		if (closeCallback_)
 			closeCallback_();
@@ -95,6 +95,7 @@ void Channel::handleEvent(Timestamp receiveTime)
 	}
 	if (revents_ & (POLLERR | POLLNVAL))//windows上按ctrl+c会进入这里,执行errorCallback,得到的socketerror为0
 	{
+		LOG_WARN << "POLLERR|POLLNVAL";
 		if (errorCallback_)
 			errorCallback_();
 	}

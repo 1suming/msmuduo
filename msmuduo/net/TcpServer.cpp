@@ -1,4 +1,4 @@
-#include"stdafx.h"
+#include"msmuduo/stdafx.h"
 #include"TcpServer.h"
 
 #include"base/Logging.h"
@@ -6,6 +6,7 @@
 
 #include"Acceptor.h"
 #include"EventLoop.h"
+#include"EventLoopThreadPool.h"
 
 
 #include<boost/bind.hpp>
@@ -13,15 +14,16 @@
 NS_USING;
 
 TcpServer::TcpServer(EventLoop* loop,
-			const InetAddress& listenAddr,
-			const string& nameArg,
-			Option option) :
+	const InetAddress& listenAddr,
+	const string& nameArg,
+	Option option) :
 
 	loop_(CHECK_NOTNULL(loop)),
 	hostport_(listenAddr.toIpPort()),
 	name_(nameArg),
-	acceptor_(new Acceptor(loop,listenAddr,option==kReusePort)), //new
-	//threadPool_(new EventLoopThreadPool(loop)),
+	acceptor_(new Acceptor(loop, listenAddr, option == kReusePort)), //new
+	threadPool_(new EventLoopThreadPool(loop, name_)),
+ 
 	connectionCallback_(defaultConnectionCallback),
 	messageCallback_(defaultMessageCallback),
 	nextConnId_(1)
@@ -51,20 +53,20 @@ TcpServer::~TcpServer()
 	}
 }
 
-/*
+
 void TcpServer::setThreadNum(int numThreads)
 {
 	assert(0 <= numThreads);
-	threadPool_->setThreadNum(numThreads);
+ 	threadPool_->setThreadNum(numThreads);
 }
-*/
+
 
 
 void TcpServer::start()
 {
 	if (started_.getAndSet(1) == 0)
 	{
-		//threadPool_->start(threadInitCallback_);
+		threadPool_->start(threadInitCallback_);
 
 		assert(!acceptor_->listenning());
 		loop_->runInLoop(
@@ -76,8 +78,9 @@ void TcpServer::start()
 void TcpServer::newConnection(int sockfd, const InetAddress& peerAddr)
 {
 	loop_->assertInLoopThread();
-	//EventLoop* ioLoop = threadPool_->getNextLoop();
-	EventLoop* ioLoop = loop_;
+	//EventLoop* ioLoop = loop_;
+	EventLoop* ioLoop = threadPool_->getNextLoop();
+
 	char buf[32];
 	snprintf(buf, sizeof buf, ":%s#%d", hostport_.c_str(), nextConnId_);
 

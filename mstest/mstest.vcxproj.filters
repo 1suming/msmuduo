@@ -66,6 +66,18 @@
     <ClCompile Include="CreateTimerQueueTimer_test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="shared_ptr_stackoverflow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stackoverflow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="pollin_pollout_pollerr.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LessThanCompare.h">

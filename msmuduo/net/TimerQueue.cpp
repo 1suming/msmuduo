@@ -1,4 +1,4 @@
-#include"stdafx.h"
+#include"msmuduo/stdafx.h"
 #include"TimerQueue.h"
 
 
@@ -386,19 +386,19 @@ std::vector<TimerQueue::Entry> TimerQueue::getExpired(Timestamp now)
 #ifdef WIN  //-----only Win
 void TimerRoutine(PVOID lpParam, BOOLEAN TimerOrWaitFired)
 {
-	if (lpParam == NULL)
+ 	if (lpParam == NULL)
 	{
 		LOG_WARN << "TimerRoutine get NULL lpParam";
 		return;
 	}
-
+ 
 	socket_t  sockfd = *(socket_t*)(lpParam);
 	if (sockfd == INVALID_SOCKET)
 	{
 		LOG_WARN << "TimerRoutine get INVALID_SOCKET";
 		return;
 	}
-
+ 
 	uint64_t one = 1;
 	ssize_t n = sockettool::write(sockfd, &one, sizeof one);
 	if (n != sizeof(one))
@@ -410,13 +410,20 @@ void TimerRoutine(PVOID lpParam, BOOLEAN TimerOrWaitFired)
 
 void TimerQueue::resetTimerWin(Timestamp expiration)
 {
+	//LOG_INFO << "expiration:" << expiration.microSecondsSinceEpoch();
+	//LOG_INFO << "now:" << Timestamp::now().microSecondsSinceEpoch();
 	int64_t microseconds = expiration.microSecondsSinceEpoch() -
 		Timestamp::now().microSecondsSinceEpoch();
 
+	if (microseconds < 100)
+	{
+		microseconds = 100;
+	}
 	DWORD dueTime = (DWORD)microseconds / 1000;//due:到期的，
 
 	if (hTimer_)
 	{
+		LOG_TRACE << "-----------------------------------delete timer";
 		if (!DeleteTimerQueueTimer(NULL, hTimer_, NULL))
 		{
 			LOG_ERROR << "DeleteTimerQueueTimer failed:" << getErrno() << getErrorMsg(getErrno());
@@ -438,7 +445,18 @@ void TimerQueue::resetTimerWin(Timestamp expiration)
 
 	*/
 	// Set a timer to call the timer routine in x seconds
+	LOG_TRACE << "-----------------------------create timer dueTime:"<<(uint64_t)dueTime;
+	/*
+	某次调试发现：-create timer dueTime:4294966 - timerqueue.cpp:445 
+	每隔1秒或2秒，loop.runEvery(1, boost::bind(print, "once1"));
+	loop.runEvery(2, boost::bind(print, "once2"));
+	怎么成4294966这么大的了？
+	打印:expiration: 1470469212286000
+	打印now:         1470469212288000
+	原来是expiration比now小，减去后为负值，DWORD dueTime = (DWORD)microseconds / 1000; microseconds转成DWORD（unsigned long
+	为一个无符号数，导致很大） ,所以应该判断microsecond是不是为负数或小于某个值
 
+	*/
 	if (!CreateTimerQueueTimer(&hTimer_, NULL, (WAITORTIMERCALLBACK)TimerRoutine,
 		&wakeupFd_[1], dueTime, 0, 0))
 	{

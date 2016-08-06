@@ -1,13 +1,13 @@
 #ifndef _TcpConnection_h
 #define _TcpConnection_h
 
-#include"base/StringPiece.h"
+#include"msmuduo/base/StringPiece.h"
 
 
-#include"net/Callbacks.h"
-#include"net/Buffer.h"
-#include"net/InetAddress.h"
-
+#include"msmuduo/net/Callbacks.h"
+#include"msmuduo/net/Buffer.h"
+#include"msmuduo/net/InetAddress.h"
+#include"msmuduo/net/Channel.h"
 
 #include<boost/scoped_ptr.hpp>
 #include<boost/shared_ptr.hpp>

@@ -1,11 +1,11 @@
 #ifndef _Connector_h
 #define _Connector_h
 
-#include"net/InetAddress.h"
+#include"msmuduo/net/InetAddress.h"
 #include<boost/function.hpp>
 #include <boost/enable_shared_from_this.hpp>
 #include<boost/scoped_ptr.hpp>
-#include"base/Logging.h"
+#include"msmuduo/base/Logging.h"
 
 NS_BEGIN
 

@@ -1,4 +1,4 @@
-#include"stdafx.h"
+#include"msmuduo/stdafx.h"
 #include"Socket.h"
 
 #include"base/sockettool.h"
@@ -73,6 +73,7 @@ int Socket::accept(InetAddress* peeraddr)
 
 void Socket::shutdownWrite()
 {
+	LOG_INFO << "----------shutdownWrite:";
 	sockettool::shutdownWrite(sockfd_);
 }
 void Socket::setTcpNoDelay(bool on)

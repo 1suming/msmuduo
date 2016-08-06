@@ -1,12 +1,13 @@
 #ifndef _Thread_h
 #define _Thread_h
 
+#include"msmuduo/base/Atomic.h"
 
 #include <boost/function.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 #include<boost/shared_ptr.hpp>
-#include<boost/atomic.hpp>
+ 
 
 #include<string>
 using namespace std;
@@ -51,7 +52,7 @@ public:
 
 	bool started() const { return started_; }
 	const string& name() const { return name_; }
-	static int numCreated() { return numCreated_; }
+	static int numCreated() { return numCreated_.get(); }
 
 	int tid(){return tid_;}
 
@@ -130,8 +131,7 @@ public:
 private:
 	void setDefaultName()
 	{
-		numCreated_++;
-		int num = numCreated_;
+		int num = numCreated_.incrementAndGet();
 		if (name_.empty())
 		{
 			char buf[32];
@@ -155,7 +155,7 @@ private:
 
 	ThreadFunc func_;
 
-	static boost::atomic_int numCreated_;
+	static AtomicInt32 numCreated_;
 
 };
 

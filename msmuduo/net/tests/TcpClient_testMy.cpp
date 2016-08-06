@@ -1,4 +1,4 @@
-#include"stdafx.h"
+#include"msmuduo/stdafx.h"
 #include"net/Connector.h"
 #include"net/EventLoop.h"
 #include"net/Acceptor.h"
@@ -25,10 +25,12 @@ void connectCallback( const TcpConnectionPtr& conn)
 
 }
 
-void messageCallback(const TcpConnectionPtr&, Buffer* buf, Timestamp time)
+void messageCallback(const TcpConnectionPtr& conn, Buffer* buf, Timestamp time)
 {
 	LOG_DEBUG << "---mesageCallback";
-	printf("%s\n", buf->retrieveAllAsString().c_str());
+	string str = buf->retrieveAllAsString();
+	printf("%s\n", str.c_str());
+	conn->send(str);
 }
 
 
