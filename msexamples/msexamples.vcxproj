@@ -12,18 +12,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="filetransfer\client_test.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="filetransfer\download.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="idleconnection\echo.cpp" />
-    <ClCompile Include="idleconnection\main.cpp" />
+    <ClCompile Include="idleconnection\main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="socks4a\tcprelay.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="idleconnection\echo.h" />
     <ClInclude Include="platform.h" />
+    <ClInclude Include="socks4a\tunnel.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="type.h" />
   </ItemGroup>

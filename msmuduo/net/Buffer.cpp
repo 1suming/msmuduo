@@ -68,6 +68,13 @@ ssize_t Buffer::readFd(int fd, int* savedErrno)
 	__in_out      LPDWORD lpFlags,
 	__in          LPWSAOVERLAPPED lpOverlapped,
 	__in          LPWSAOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine
+
+	返回值
+	 If no error occurs and the receive operation has completed immediately, WSARecv returns zero.
+	In this case, the completion routine will have already been scheduled to be called once the calling thread is in the alertable state. 
+	Otherwise, a value of SOCKET_ERROR is returned, and a specific error code can be retrieved by calling WSAGetLastError.
+	The error code WSA_IO_PENDING indicates that the overlapped operation has been successfully initiated and 
+	that completion will be indicated at a later time. Any other error code indicates that the overlapped operation was not successfully initiated and no completion indication will occur.
 	*/
 
 	char extrabuf[65536];
@@ -87,14 +94,28 @@ ssize_t Buffer::readFd(int fd, int* savedErrno)
 	int rc;
 	//while (1)
 	{
+		/*
+		之前存在的问题，这个readFd要返回读取的字节数，如果返回是0代表连接关闭，会处理handleClose事件。在windows上面我之前是直接返回retReadCnt
+		有个例子，服务器一次性发送大量数据到客户端，客户端的readFd返回0导致在函数void TcpConnection::handleRead(Timestamp receiveTime)
+		handleClose，导致客户端没有接收到数据进行处理。
+		一次性接受到大量数量，我打印WSALAstError结果如下：
+		WSAGetLastError 0,The operation completed successfully.
+
+		最后找到原因是漏掉了retReadCnt += recvBytes; 导致return retReadCnt是0，连接就被关闭了。
+
+
+		为什么linux readFd返回0代表连接关闭 没有问题？ 因为我们能够的readFd是被handleRead调用的，能走到handleRead就代表有数据读或者错误发生。
+		*/
 		//cout << endl << "_____" << endl;
 		rc = WSARecv(fd, wsabuf, 2, &recvBytes, &flags, NULL, NULL);
-		//cout << endl << "bbbbbbb"<<"rc:"<<rc<<",recvg"<<recvBytes << endl;
-		sleep(10 * 100);
-		if (rc < 0) //#define SOCKET_ERROR            (-1)
+		 		 
+		LOG_DEBUG << "rc:" << rc << ",recbbytes:" <<(uint32_t) recvBytes;
+
+		int err;
+		if (rc <0  )//#define SOCKET_ERROR            (-1) //==SOCKET_ERROR && (WSA_IO_PENDING!=(err=WSAGetLastError()) )  
 		{
-			int err = WSAGetLastError();
-			*savedErrno = WSAGetLastError();
+			err = WSAGetLastError();
+			*savedErrno = err;
 			LOG_DEBUG << "err" << err << "," << getErrorMsg(err);
 			if (err == WSAEWOULDBLOCK)//一般是非阻塞或者异步SOCKET操作中，指定的操作不能立即完成，因此返回这个代码，经过试验，确实有errno:10035
 			{
@@ -111,8 +132,7 @@ ssize_t Buffer::readFd(int fd, int* savedErrno)
 		}
 		else
 		{
-		 
-			if (recvBytes <= writable)  //这里一定要判断
+ 			if (recvBytes <= writable)  //这里一定要判断
 			{
 				retReadCnt += recvBytes;
 				writerIndex_ += recvBytes;
@@ -120,6 +140,7 @@ ssize_t Buffer::readFd(int fd, int* savedErrno)
 			}
 			else
 			{
+				retReadCnt += recvBytes; //这个一定不能漏
 				writerIndex_ = buffer_.size();
 				append(extrabuf, recvBytes - writable);
 			}

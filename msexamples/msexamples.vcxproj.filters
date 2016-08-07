@@ -16,6 +16,7 @@
     <ClCompile Include="filetransfer\client_test.cpp" />
     <ClCompile Include="idleconnection\echo.cpp" />
     <ClCompile Include="idleconnection\main.cpp" />
+    <ClCompile Include="socks4a\tcprelay.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -28,6 +29,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="idleconnection\echo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="socks4a\tunnel.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

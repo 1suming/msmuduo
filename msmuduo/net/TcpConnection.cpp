@@ -172,9 +172,11 @@ void TcpConnection::sendInLoop(const void* data, size_t len)
 	*/
 	if (!channel_->isWriting() && outputBuffer_.readableBytes() == 0)//这2个条件必须同时满足才能立刻发
 	{
-		nwrote = ::send(channel_->fd(), (char*)data,len, 0);
+ 		nwrote = ::send(channel_->fd(), (char*)data,len, 0);
+		//LOG_DEBUG << "---------direct send:len:"<<(int)len<<",wrote" << (int)nwrote;
 		if (nwrote >= 0)
 		{
+			//LOG_DEBUG << "nwrote>=0";
 			remaining = len - nwrote;
 			if (remaining == 0 && writeCompleteCallback_)//写完了就触发writeCompleteCallback
 			{
@@ -184,6 +186,7 @@ void TcpConnection::sendInLoop(const void* data, size_t len)
 		}
 		else //nwrote < 0
 		{
+			//LOG_DEBUG<< "nwote<0";
 			nwrote = 0;
 			if (errno != EWOULDBLOCK)
 			{
@@ -417,7 +420,7 @@ void TcpConnection::handleRead(Timestamp receiveTime)
 	}
 	else if (n == 0)
 	{
-		handleClose();
+ 		handleClose();
 	}
 	else
 	{

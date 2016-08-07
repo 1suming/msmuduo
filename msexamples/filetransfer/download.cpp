@@ -66,13 +66,18 @@ int main(int argc, char * argv[])
 {
 	 
 	Logger::setLogLevel(Logger::TRACE);
+	const char* file = "F:/vsproject/msmuduo/Debug/a.txt";
+	if (argc > 1)
+	{
+		file = argv[1];
+	}
 	if (1) //argc > 1)
 	{
-		g_file = "F:/vsproject/msmuduo/Debug/a.txt";// argv[1];
+		g_file = file;
 		string fileContent = readFile(g_file);
 		printf("%s\n", fileContent.c_str());
 
-		
+
 		EventLoop loop;
 		InetAddress listenAddr(9981);
 		TcpServer server(&loop, listenAddr, "fileserver");
