@@ -18,6 +18,7 @@ void logInThread()
 
 int main()
 {
+	/*
 	ThreadPool pool("pool");
 	pool.start(5);
 
@@ -28,4 +29,16 @@ int main()
 	pool.run(logInThread);
 
 	sleep(10);
+	*/
+	LOG_DEBUG << "debug msg";
+	LOG_INFO << "info msg";
+	LOG_OK << "ok msg";
+	LOG_WARN << "warn msg";
+	LOG_ERROR << "error msg" << "error is ";
+
+	LOG_INFO << "info msg";
+
+
+
+
 }

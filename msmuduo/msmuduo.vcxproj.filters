@@ -46,6 +46,11 @@
     <ClInclude Include="net\TimerId.h" />
     <ClInclude Include="net\EventLoopThread.h" />
     <ClInclude Include="net\EventLoopThreadPool.h" />
+    <ClInclude Include="base\yqueue.hpp" />
+    <ClInclude Include="base\atomic_ptr.hpp" />
+    <ClInclude Include="base\ypipe.hpp" />
+    <ClInclude Include="base\fast_mutex.h" />
+    <ClInclude Include="base\echotool.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -109,6 +114,9 @@
     <ClCompile Include="net\tests\EventLoopThread_test.cpp" />
     <ClCompile Include="net\tests\TcpServer_multiLoopTest.cpp" />
     <ClCompile Include="net\tests\Timer_test.cpp" />
+    <ClCompile Include="base\tests\fast_mutex_test.cpp" />
+    <ClCompile Include="base\echotool.cpp" />
+    <ClCompile Include="base\tests\echotool_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt" />

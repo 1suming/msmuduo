@@ -29,6 +29,7 @@ const char* LogLevelName[Logger::NUM_LOG_LEVELS] =
 	"TRACE ",
 	"DEBUG ",
 	"INFO  ",
+	"OK    ",
 	"WARN  ",
 	"ERROR ",
 	"FATAL ",
@@ -121,8 +122,27 @@ Logger::~Logger()
 {
 	stream_ << " - " << basename_ << ':' << line_ << '\n';//注意是'\n'
 
+	//这里加上色彩
+	if (level_ == OK)
+		echotool::changeToColor(COLOR_GREEN);
+	else if (level_ == ERROR || level_==FATAL)
+		echotool::changeToColor(COLOR_RED);
+	else if (level_ == WARN)
+		echotool::changeToColor(COLOR_YELLOW);
+
+
 	const LogStream::Buffer& buf(stream().buffer());
+
+	
+
+
 	g_output(buf.data(), buf.length()); //!析构时，才输出内容
+	
+	//--------------
+	if (level_ == OK || level_ == ERROR || level_ == FATAL || level_ == WARN)
+		echotool::changeToOldColor();
+
+
 	if (level_ == FATAL)//FATAL 终止
 	{
 		g_flush();

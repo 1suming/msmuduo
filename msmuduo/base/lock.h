@@ -2,10 +2,19 @@
 #ifndef _lock_h_
 #define _lock_h_
 
+#define USE_MUTEX_FAST_MUTEX
+/*
+ fastmutex不能和条件变量结合使用
+ 
+*/
+#include"msmuduo/base/fast_mutex.h"
+ 
+
+//
 // 锁：windows下为自旋锁和互斥锁混合，linux下则为互斥锁
 namespace ms
 {
-	class mutex_t
+ 	class mutex_t
 	{
 	public:
 		mutex_t();
@@ -27,9 +36,11 @@ namespace ms
 #endif
 
 	};
-
+ 
 class lock_guard_t
 {
+ 
+
 public:
 	lock_guard_t(mutex_t& mutex) :
 		m_mutex(mutex)
@@ -42,11 +53,32 @@ public:
 		}
 
 private:
-	mutex_t& m_mutex; //一定要是引用,如果不是引用，就是每次新创建了一个mutex_t.
+ 	mutex_t& m_mutex; //一定要是引用,如果不是引用，就是每次新创建了一个mutex_t.
+ 
 
 };
-
 #define lock_guard_t(x) printf("\nMissing guard object name!!!\n")
+
+
+class lock_guard_fastmutex_t
+{
+public:
+	lock_guard_fastmutex_t(fast_mutex& mutex) :
+	m_mutex(mutex)
+	{
+		m_mutex.lock();
+	}
+	~lock_guard_fastmutex_t()
+	{
+		m_mutex.unlock();
+	}
+
+private:
+	fast_mutex& m_mutex;
+
+};
+#define lock_guard_fastmutex_t(x) printf("\nMissing guard object name!!!\n")
+
 
 
 class condition_var_t

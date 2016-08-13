@@ -267,7 +267,7 @@ void TcpConnection::handleWrite()
 				}
 
 
-				if (state_ == kDisconnecting)
+				if (state_ == kDisconnecting) //在shutdown里面如果正在是没有shutdown的，但会设置状态，这里如果有状态则shutdown.
 				{
 					shutdownInLoop();
 				}
@@ -293,7 +293,7 @@ void TcpConnection::shutdown()
 	//FIXME:use compare and swap
 	if (state_ == kConnected)
 	{
-		setState(kDisconnecting); //设置状态为kDisconnecting
+		setState(kDisconnecting); //设置状态为kDisconnecting  很重要，保证在某个时刻一定会关闭
 		//FIXME:use shared_from_this
 		loop_->runInLoop(
 			boost::bind(&TcpConnection::shutdownInLoop, this));

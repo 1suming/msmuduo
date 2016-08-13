@@ -5,6 +5,9 @@
 #include"LogStream.h"
 #include"Thread.h"
 #include"FileUtil.h"
+
+#include"echotool.h"
+
 NS_BEGIN
 
 #undef ERROR //ewindows下ERROR在某个文件中有宏定义
@@ -17,7 +20,10 @@ public:
 	{
 		TRACE,
 		DEBUG,
+
 		INFO,
+		OK,//显示为绿色
+
 		WARN,
 		ERROR,
 		FATAL,
@@ -43,9 +49,12 @@ public:
 		time_(Timestamp::now())
 	{
 		basename_ = FileUtil::getFileNameFromPath(filename);
+		
 
 		logToStream();
 		stream_ << func << ' ';
+
+		
 	}
 	~Logger();
 
@@ -103,12 +112,7 @@ extern Logger::LogLevel g_logLevel; //声明 ,外部变量
 //
 
 
-enum ECHO_COLOR{
-	COLOR_DEFAULT,
-	COLOR_RED,
-	COLOR_GREEN,
-	COLOR_YELLOW
-};
+ 
 
 #define LOG_TRACE  if(Logger::logLevel() <= Logger::TRACE ) \
 	Logger(__FILE__, __LINE__, Logger::TRACE, _FUNC_).stream()  //返回LogStream 每次都新建一个临时对象，析构时调用flush
@@ -118,7 +122,14 @@ enum ECHO_COLOR{
 
 
 #define LOG_INFO if(Logger::logLevel()<=Logger::INFO) \
-	Logger(__FILE__, __LINE__, Logger::INFO, _FUNC_).stream()
+	 Logger(__FILE__, __LINE__, Logger::INFO, _FUNC_).stream()
+
+
+#define LOG_OK if(Logger::logLevel()<=Logger::OK) \
+	Logger(__FILE__, __LINE__, Logger::OK, _FUNC_).stream()
+
+
+
 
 #define LOG_WARN if(Logger::logLevel()<=Logger::WARN) \
 	Logger(__FILE__, __LINE__, Logger::WARN, _FUNC_).stream()
