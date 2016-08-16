@@ -6,7 +6,7 @@
 #include<boost/shared_ptr.hpp>
 using namespace std;
 
- 
+  
 class A{
 public:
 	int a;
@@ -27,7 +27,7 @@ public:
 int main()
 {
 	 
-	shared_ptr<B> bPtr(new B(5));
+	boost::shared_ptr<B> bPtr(new B(5));
 	cout << bPtr.use_count() << endl;
 
 	A a(bPtr->a);

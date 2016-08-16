@@ -8,6 +8,9 @@
 #include <boost/noncopyable.hpp>
 #include<boost/ptr_container/ptr_vector.hpp>
 
+/*
+threadpool跟我们经常见到的taskqueue是同义的，只不过这里用了boost::bind表示task.
+*/
 
 #include<deque>
 

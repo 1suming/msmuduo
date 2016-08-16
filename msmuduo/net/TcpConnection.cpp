@@ -60,7 +60,7 @@ TcpConnection::TcpConnection(EventLoop* loop,
 
 
 
-	LOG_DEBUG << "TcpConnection::Constructor[" << name_ << "] at " << this
+	LOG_OK<< "TcpConnection::Constructor[" << name_ << "] at " << this
 		<< " fd=" << sockfd;
 
 	socket_->setKeepAlive(true);
@@ -69,7 +69,7 @@ TcpConnection::TcpConnection(EventLoop* loop,
 
 TcpConnection::~TcpConnection()
 {
-	LOG_DEBUG << "TcpConnection::Destructor[" << name_ << "] at " << this
+	LOG_OK << "TcpConnection::Destructor[" << name_ << "] at " << this
 		<< " fd=" << channel_->fd()
 		<< " state=" << state_;
 	assert(state_ == kDisconnected);//什么时候会把state改成kDisConnected

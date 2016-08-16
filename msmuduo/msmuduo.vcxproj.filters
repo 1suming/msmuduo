@@ -51,6 +51,11 @@
     <ClInclude Include="base\ypipe.hpp" />
     <ClInclude Include="base\fast_mutex.h" />
     <ClInclude Include="base\echotool.h" />
+    <ClInclude Include="file\FileEnv.h" />
+    <ClInclude Include="net\http\HttpRequest.h" />
+    <ClInclude Include="net\http\HttpResponse.h" />
+    <ClInclude Include="net\http\HttpContext.h" />
+    <ClInclude Include="net\http\HttpServer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -117,6 +122,11 @@
     <ClCompile Include="base\tests\fast_mutex_test.cpp" />
     <ClCompile Include="base\echotool.cpp" />
     <ClCompile Include="base\tests\echotool_test.cpp" />
+    <ClCompile Include="net\http\HttpResponse.cpp" />
+    <ClCompile Include="net\http\HttpContext.cpp" />
+    <ClCompile Include="net\http\HttpServer.cpp" />
+    <ClCompile Include="net\http\tests\HttpServer_test.cc" />
+    <ClCompile Include="net\http\tests\HttpRequest_unittest.cc" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt" />

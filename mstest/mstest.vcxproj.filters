@@ -78,6 +78,21 @@
     <ClCompile Include="tmp.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="weak_ptr_use.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="template_seprate.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="template_seprate_test.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stl_queue_threadsafe.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="typename_test.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LessThanCompare.h">
@@ -91,6 +106,9 @@
     </ClInclude>
     <ClInclude Include="globalsock.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="template_seprate.h">
+      <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

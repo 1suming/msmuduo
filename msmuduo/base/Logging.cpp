@@ -26,13 +26,13 @@ Logger::LogLevel g_logLevel = initLogLevel();
 
 const char* LogLevelName[Logger::NUM_LOG_LEVELS] =
 {
-	"TRACE ",
-	"DEBUG ",
-	"INFO  ",
-	"OK    ",
-	"WARN  ",
-	"ERROR ",
-	"FATAL ",
+	"[TRACE] ",
+	"[DEBUG] ",
+	"[INFO ] ",
+	"[OK   ] ",
+	"[WARN ] ",
+	"[ERROR] ",
+	"[FATAL] ",
 };
 
 /** helper class for known string length  at compile time */
@@ -157,7 +157,7 @@ void Logger::logToStream()
 	formatTime();
 	CurrentThread::tid();
 	stream_ << T(CurrentThread::tidString(), CurrentThread::tidStringLength());
-	stream_ << T(LogLevelName[level_], 6);
+	stream_ << T(LogLevelName[level_], 8) ;
 }
 
 

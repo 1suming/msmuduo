@@ -109,6 +109,7 @@
     <ClInclude Include="base\Timestamp.h" />
     <ClInclude Include="base\ypipe.hpp" />
     <ClInclude Include="base\yqueue.hpp" />
+    <ClInclude Include="file\FileEnv.h" />
     <ClInclude Include="net\Acceptor.h" />
     <ClInclude Include="net\Buffer.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -117,6 +118,10 @@
     <ClInclude Include="net\Channel.h" />
     <ClInclude Include="net\EventLoopThread.h" />
     <ClInclude Include="net\EventLoopThreadPool.h" />
+    <ClInclude Include="net\http\HttpContext.h" />
+    <ClInclude Include="net\http\HttpRequest.h" />
+    <ClInclude Include="net\http\HttpResponse.h" />
+    <ClInclude Include="net\http\HttpServer.h" />
     <ClInclude Include="net\InetAddress.h" />
     <ClInclude Include="net\Poller.h" />
     <ClInclude Include="net\poller\PollPoller.h" />
@@ -181,7 +186,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="base\tests\Logging_test.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="base\tests\LogStream_test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -212,6 +217,13 @@
     </ClCompile>
     <ClCompile Include="net\EventLoopThread.cpp" />
     <ClCompile Include="net\EventLoopThreadPool.cpp" />
+    <ClCompile Include="net\http\HttpContext.cpp" />
+    <ClCompile Include="net\http\HttpResponse.cpp" />
+    <ClCompile Include="net\http\HttpServer.cpp" />
+    <ClCompile Include="net\http\tests\HttpRequest_unittest.cc" />
+    <ClCompile Include="net\http\tests\HttpServer_test.cc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="net\InetAddress.cpp" />
     <ClCompile Include="net\Poller.cpp" />
     <ClCompile Include="net\poller\DefaultPoller.cpp" />

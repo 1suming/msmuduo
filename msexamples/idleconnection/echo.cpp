@@ -43,7 +43,7 @@ void EchoServer::onConnection(const TcpConnectionPtr& conn)
 
 	if (conn->connected())
 	{
-		EntryPtr entry(new Entry(conn));
+		EntryPtr entry(new Entry(conn)); //conn可以转成WeakTcpConnectionPtr
 		connectionBuckets_.back().insert(entry);
 		dumpConnectionBuckets();
 		WeakEntryPtr weakEntry(entry);

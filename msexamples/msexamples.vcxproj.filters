@@ -17,6 +17,9 @@
     <ClCompile Include="idleconnection\echo.cpp" />
     <ClCompile Include="idleconnection\main.cpp" />
     <ClCompile Include="socks4a\tcprelay.cpp" />
+    <ClCompile Include="socks4a\socks4a.cpp" />
+    <ClCompile Include="netty\echo\echo_server.cpp" />
+    <ClCompile Include="netty\echo\echo_client.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
