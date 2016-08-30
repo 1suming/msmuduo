@@ -56,6 +56,7 @@
     <ClInclude Include="net\http\HttpResponse.h" />
     <ClInclude Include="net\http\HttpContext.h" />
     <ClInclude Include="net\http\HttpServer.h" />
+    <ClInclude Include="util\hexdump.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -127,6 +128,8 @@
     <ClCompile Include="net\http\HttpServer.cpp" />
     <ClCompile Include="net\http\tests\HttpServer_test.cc" />
     <ClCompile Include="net\http\tests\HttpRequest_unittest.cc" />
+    <ClCompile Include="util\hexdump.cpp" />
+    <ClCompile Include="util\tests\hexdump_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt" />

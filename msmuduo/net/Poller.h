@@ -47,6 +47,10 @@ public:
 		ownerLoop_->assertInLoopThread();
 	}
 
+	inline int getChannelMapSize()
+	{
+		return channels_.size();
+	}
 
 protected:
 	typedef std::map<int, Channel*> ChannelMap;//Channel->fd()×÷Îªkey

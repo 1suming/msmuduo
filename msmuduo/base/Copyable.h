@@ -1,5 +1,5 @@
-#ifndef _Copyable_H
-#define _Copyable_H
+#ifndef _copyable_H
+#define _copyable_H
 
 #include"msmuduo/stdafx.h"
 NS_BEGIN

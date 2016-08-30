@@ -17,7 +17,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -83,7 +83,7 @@
     </ClInclude>
     <ClInclude Include="base\Atomic.h" />
     <ClInclude Include="base\atomic_ptr.hpp" />
-    <ClInclude Include="base\Copyable.h" />
+    <ClInclude Include="base\copyable.h" />
     <ClInclude Include="base\CountDownLatch.h" />
     <ClInclude Include="base\crossplatform.h" />
     <ClInclude Include="base\echotool.h" />
@@ -141,6 +141,7 @@
     </ClInclude>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="type.h" />
+    <ClInclude Include="util\hexdump.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="base\AsyncLogging.cpp">
@@ -220,7 +221,9 @@
     <ClCompile Include="net\http\HttpContext.cpp" />
     <ClCompile Include="net\http\HttpResponse.cpp" />
     <ClCompile Include="net\http\HttpServer.cpp" />
-    <ClCompile Include="net\http\tests\HttpRequest_unittest.cc" />
+    <ClCompile Include="net\http\tests\HttpRequest_unittest.cc">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="net\http\tests\HttpServer_test.cc">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -288,6 +291,10 @@
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="util\hexdump.cpp" />
+    <ClCompile Include="util\tests\hexdump_test.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

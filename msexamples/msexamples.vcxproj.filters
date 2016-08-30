@@ -20,6 +20,15 @@
     <ClCompile Include="socks4a\socks4a.cpp" />
     <ClCompile Include="netty\echo\echo_server.cpp" />
     <ClCompile Include="netty\echo\echo_client.cpp" />
+    <ClCompile Include="hub\codec.cpp" />
+    <ClCompile Include="hub\hub.cpp" />
+    <ClCompile Include="hub\pub.cpp" />
+    <ClCompile Include="hub\pubsub.cpp" />
+    <ClCompile Include="hub\sub.cpp" />
+    <ClCompile Include="memcached\server\server.cpp" />
+    <ClCompile Include="memcached\server\MemcacheServer.cpp" />
+    <ClCompile Include="fastcgi\FastCgiCodec.cpp" />
+    <ClCompile Include="fastcgi\fastcgi_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -37,5 +46,23 @@
     <ClInclude Include="socks4a\tunnel.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="hub\codec.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="hub\pubsub.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="memcached\server\MemcacheServer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="fastcgi\fastcgi.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="fastcgi\FastCgiCodec.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="memcached\Readme.txt" />
   </ItemGroup>
 </Project>

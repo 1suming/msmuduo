@@ -3,7 +3,7 @@
 
 #include"msmuduo/stdafx.h"
 
-#include"msmuduo/base/Copyable.h"
+#include"msmuduo/base/copyable.h"
 #include"msmuduo/base/Timestamp.h"
  
 #include<assert.h>

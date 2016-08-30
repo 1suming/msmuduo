@@ -393,7 +393,11 @@ namespace sockettool
 		//windows下要强制转成char*
 		if (::getsockopt(sockfd, SOL_SOCKET, SO_ERROR, (char*)&optval, &optlen) < 0)
 		{
+#ifdef WIN 
+			return WSAGetLastError();
+#else 
 			return errno;
+#endif
 		}
 		else
 		{

@@ -58,6 +58,9 @@ void Channel::update()
  	loop_->updateChannel(this);
 
 }
+//这个函数被TcpConnection,Acceptor,connector等外部调用，如Acceptor
+//acceptChannel_.disableAll();
+//acceptChannel_.remove();
 
 void Channel::remove()
 {

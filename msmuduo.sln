@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mstest", "mstest\mstest.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mszexamples", "msexamples\msexamples.vcxproj", "{0FEF56DD-24C1-4E2F-A1A0-549B7970CE0D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "msuLibeventWrapper", "msuLibeventWrapper\msuLibeventWrapper.vcxproj", "{2ABF9D47-37E6-43B7-92E2-86C43B319140}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -27,6 +29,10 @@ Global
 		{0FEF56DD-24C1-4E2F-A1A0-549B7970CE0D}.Debug|Win32.Build.0 = Debug|Win32
 		{0FEF56DD-24C1-4E2F-A1A0-549B7970CE0D}.Release|Win32.ActiveCfg = Release|Win32
 		{0FEF56DD-24C1-4E2F-A1A0-549B7970CE0D}.Release|Win32.Build.0 = Release|Win32
+		{2ABF9D47-37E6-43B7-92E2-86C43B319140}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2ABF9D47-37E6-43B7-92E2-86C43B319140}.Debug|Win32.Build.0 = Debug|Win32
+		{2ABF9D47-37E6-43B7-92E2-86C43B319140}.Release|Win32.ActiveCfg = Release|Win32
+		{2ABF9D47-37E6-43B7-92E2-86C43B319140}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

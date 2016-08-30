@@ -2,7 +2,8 @@
 #ifndef _lock_h_
 #define _lock_h_
 
-#define USE_MUTEX_FAST_MUTEX
+#include"msmuduo/stdafx.h" //把这个放在.h中
+
 /*
  fastmutex不能和条件变量结合使用
  

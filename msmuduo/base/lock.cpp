@@ -1,4 +1,4 @@
-#include"../stdafx.h"
+#include"msmuduo/stdafx.h"
 
 #include"lock.h"
 

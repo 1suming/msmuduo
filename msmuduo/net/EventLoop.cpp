@@ -131,8 +131,10 @@ void EventLoop::loop()
 
 		++iterator_;
 
+ 
 		if (Logger::logLevel() <= Logger::TRACE)
 		{
+			LOG_TRACE << "now all connection num (not include inner ,has subtract 3)is:[" << poller_->getChannelMapSize()-3 << "] connection";
 			printActiveChannels();
 		}
 		//TODO sort channel by priority

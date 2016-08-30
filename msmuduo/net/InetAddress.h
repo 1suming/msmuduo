@@ -4,7 +4,7 @@
 
 #include<boost/noncopyable.hpp>
 #include"msmuduo/base/StringPiece.h"
-#include"msmuduo/base/Copyable.h"
+#include"msmuduo/base/copyable.h"
 
 NS_BEGIN
 /*

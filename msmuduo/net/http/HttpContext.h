@@ -6,7 +6,7 @@ http协议解析类
 #ifndef _HttpContext_h
 #define _HttpContext_h
 
-#include"msmuduo/base/Copyable.h"
+#include"msmuduo/base/copyable.h"
 #include"msmuduo/net/http/HttpRequest.h"
 
 

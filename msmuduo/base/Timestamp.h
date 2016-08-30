@@ -1,7 +1,7 @@
 ﻿#ifndef _Timestamp_h
 #define _Timestamp_h
 
-#include"Copyable.h"
+#include"copyable.h"
 #include <boost/operators.hpp>
  
 NS_BEGIN

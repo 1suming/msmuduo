@@ -90,9 +90,11 @@ public:
 	void setContext(const boost::any& context)
 	{context_ = context;}
 
+	//这里返回的是一个引用
 	const boost::any& getContext() const
 	{return context_;}
 
+	//这里返回的是一个指针   
 	boost::any* getMutableContext()
 	{return &context_;}
 
