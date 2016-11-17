@@ -29,6 +29,8 @@
     <ClCompile Include="memcached\server\MemcacheServer.cpp" />
     <ClCompile Include="fastcgi\FastCgiCodec.cpp" />
     <ClCompile Include="fastcgi\fastcgi_test.cpp" />
+    <ClCompile Include="memcached\server\Item.cpp" />
+    <ClCompile Include="memcached\server\Session.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -59,6 +61,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="fastcgi\FastCgiCodec.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="memcached\server\Item.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="memcached\server\Session.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -7,16 +7,18 @@
 #endif
 #include<boost/program_options.hpp>
 
+
 namespace po = boost::program_options;
 
-NS_USING;
 
+
+NS_USING;
 
 bool parseCommandLine(int argc, char* argv[], MemcacheServer::Options* options)
 {
 	options->tcpport = 11211;
 	options->gperfport = 11212;
-	options->threads = 4;
+	options->threads = 1;
 
 	po::options_description desc("Allowed options");
 	desc.add_options()
@@ -37,18 +39,12 @@ bool parseCommandLine(int argc, char* argv[], MemcacheServer::Options* options)
 		return false;
 	}
 	return true;
-
-
 }
 
 int main(int argc, char* argv[])
 {
 	EventLoop loop;
-#ifdef LINUX
 	EventLoopThread inspectThread;
-	
-#endif
-
 	MemcacheServer::Options options;
 	if (parseCommandLine(argc, argv, &options))
 	{
@@ -60,9 +56,5 @@ int main(int argc, char* argv[])
 		server.setThreadNum(options.threads);
 		server.start();
 		loop.loop();
-
-
 	}
-
-
 }
