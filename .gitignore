@@ -13,4 +13,4 @@ ipch
 *.o
 *.a 
 lib/*
-
+.vs
