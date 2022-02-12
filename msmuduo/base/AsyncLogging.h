@@ -53,9 +53,11 @@ private:
 	void threadFunc();
 
 	typedef ms::detail::FixedBuffer<ms::detail::kLargeBuffer> Buffer;
-	typedef boost::ptr_vector<Buffer> BufferVector;
+	typedef boost::ptr_vector<Buffer> BufferVector; 
 	typedef BufferVector::auto_type BufferPtr;  //auto_type是数据的智能指针,类似于std::auto_ptr.http://www.boost.org/doc/libs/1_61_0/libs/ptr_container/doc/ptr_vector.html
-	 
+	/*
+	auto_type是没有复制语义的，但它有移动语义
+	*/
 
 	const int flushInterval_;
 	bool running_;
@@ -72,7 +74,7 @@ private:
 	BufferPtr nextBuffer_;
 
 
-	BufferVector buffers_;
+	BufferVector buffers_; ////指针容器用于存储多块Buffer
 
 
 

@@ -30,6 +30,10 @@ NS_BEGIN
 ///|                    |                      |                      |
 ///0     <=           readerIndex       <=  writeIndex     <=         size
 ///@endcode
+/// 
+/*
+netty里面还有个ByteBuf
+*/
 
 class Buffer :public copyable
 {

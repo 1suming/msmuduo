@@ -96,6 +96,9 @@
     <ClCompile Include="boost_any_test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="ptr_vector.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LessThanCompare.h">

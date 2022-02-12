@@ -6,6 +6,7 @@
 #include<stddef.h>
 
 NS_BEGIN
+//zeromq ÀïÃæµÄyqueue 
 //  yqueue is an efficient queue implementation. The main goal is
 //  to minimise number of allocations/deallocations needed. Thus yqueue
 //  allocates/deallocates elements in batches of N.

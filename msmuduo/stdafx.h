@@ -20,11 +20,19 @@
 #ifdef WIN
 	#define snprintf _snprintf
 
+
+//提示“timespec”:“struct”类型重定义 ，添加宏即可
+
+
+/*
 struct timespec {
-	/* long long in windows is the same as long in unix for 64bit */
+	//  long long in windows is the same as long in unix for 64bit 
 	long long tv_sec;
 	long long tv_nsec;
 
 };
+*/
+
+
 #endif
 #endif

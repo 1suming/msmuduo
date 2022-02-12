@@ -17,10 +17,14 @@ AsyncLogging::AsyncLogging(const string& basename,
 	latch_(1),
 	mutex_(),
 	cond_(mutex_),
-	currentBuffer_(new Buffer), //create buffer
-	nextBuffer_(new Buffer),
+	//boost 1.78编译不通过 currentBuffer_( new Buffer  ), //create buffer
+	//boost 1.78编译不通过 nextBuffer_(new Buffer),
 	buffers_()
 {
+	 
+	currentBuffer_.ptr() = new Buffer ;//boost 1.78换这种方式让编译通过
+	nextBuffer_.ptr() = new Buffer;
+
 	currentBuffer_->bzeroinit();
 	nextBuffer_->bzeroinit();
 	buffers_.reserve(16);
@@ -45,7 +49,9 @@ void AsyncLogging::append(const char* logline, int len)
 		}
 		else //allocate a new one
 		{
-			currentBuffer_.reset(new  Buffer); //Rarely happends 
+			//boost 1.78编译不通过 currentBuffer_.reset(new  Buffer); //Rarely happends  
+			currentBuffer_.reset();
+			currentBuffer_.ptr() = (new  Buffer);
 			/*
 			类似std::auto_ptr
 			的reset()方法，如果不传递参数（或者传递NULL），则智能指针会释放当前管理的内存。如果传递一个对象，则智能指针会释放当前对象，来管理新传入的对象。
@@ -67,8 +73,13 @@ void AsyncLogging::threadFunc()
 	latch_.countDown();
 
 	LogFile output(basename_, rollSize_, false); //Important 这里的传入的threadsafe为false，为什么，因为异步本身就保证了线程安全
-	BufferPtr newBuffer1(new Buffer);
-	BufferPtr newBuffer2(new Buffer);
+	//boost 1.78编译不通过BufferPtr newBuffer1(new Buffer);
+	//boost 1.78编译不通过 BufferPtr newBuffer2(new Buffer);
+	BufferPtr newBuffer1;
+	BufferPtr newBuffer2;
+
+	newBuffer1.ptr() = new Buffer;
+	newBuffer2.ptr() = new Buffer;
 
 	newBuffer1->bzeroinit();
 	newBuffer2->bzeroinit();

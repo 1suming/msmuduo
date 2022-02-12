@@ -97,8 +97,15 @@ vs中：warning C4005: “FD_SETSIZE”: 宏重定义
 
 // 函数调用
 #ifdef WIN
+/*
+win10下面提示 error C2338: sizeof(struct stat) == sizeof(struct _stat64i32)
+
 	#define fstat _fstati64
 	#define stat _stati64
+
+*/
+	#define fstat _fstati64i32 //暂时改成_fstati64i32 _fstati64
+	#define stat _stati64i32 //暂时改成_stati64  _stati64i32
 	#define mode_t int
 	#define sleep Sleep  //Sleep()里面的单位，是以毫秒为单位
 	#define bzero(buf, len) memset(buf, 0, len)
