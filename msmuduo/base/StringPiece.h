@@ -46,8 +46,10 @@
 
 #include <string>
 
+using  std::string;
 
-NS_BEGIN
+
+namespace ms {
 
 	// For passing C-style string argument to a function.
 	class StringArg // copyable
@@ -61,7 +63,7 @@ NS_BEGIN
 			: str_(str.c_str())
 		{ }
 
- 
+
 
 		const char* c_str() const { return str_; }
 
@@ -71,7 +73,7 @@ NS_BEGIN
 
 	class StringPiece {
 	private:
-		const char*   ptr_;
+		const char* ptr_;
 		int           length_;
 
 	public:
@@ -87,7 +89,7 @@ NS_BEGIN
 			length_(static_cast<int>(strlen(ptr_))) { }
 		StringPiece(const string& str)
 			: ptr_(str.data()), length_(static_cast<int>(str.size())) { }
- 
+
 		StringPiece(const char* offset, int len)
 			: ptr_(offset), length_(len) { }
 
@@ -138,10 +140,10 @@ NS_BEGIN
 			int r = memcmp(ptr_, x.ptr_, length_ < x.length_ ? length_ : x.length_); \
 			return ((r auxcmp 0) || ((r == 0) && (length_ cmp x.length_)));          \
 	}
-		STRINGPIECE_BINARY_PREDICATE(<, <);
-		STRINGPIECE_BINARY_PREDICATE(<= , <);
-		STRINGPIECE_BINARY_PREDICATE(>= , >);
-		STRINGPIECE_BINARY_PREDICATE(>, >);
+		STRINGPIECE_BINARY_PREDICATE(< , < );
+		STRINGPIECE_BINARY_PREDICATE(<= , < );
+		STRINGPIECE_BINARY_PREDICATE(>= , > );
+		STRINGPIECE_BINARY_PREDICATE(> , > );
 #undef STRINGPIECE_BINARY_PREDICATE
 
 		int compare(const StringPiece& x) const {
@@ -173,7 +175,7 @@ NS_BEGIN
 		}
 	};
 
-NS_END
+}
 
 // ------------------------------------------------------------------
 // Functions used to create STL containers that use StringPiece

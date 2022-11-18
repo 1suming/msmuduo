@@ -8,7 +8,7 @@
 #include"msmuduo/net/EventLoop.h"
 #include"msmuduo/net/Socket.h"
 
-
+#include"msmuduo/base/WeakCallback.h"
 #include<boost/bind.hpp>
 
 
@@ -354,6 +354,31 @@ void TcpConnection::forceCloseInLoop()
 		handleClose();
 	}
 }
+
+void TcpConnection::forceCloseWithDelay(double seconds)
+{
+	/*2022-02-12由于之前用的boost，weakcallback用的是c++11里面的std,所以不兼容不能使用,暂时跟forceClose一样
+	if (state_ == kConnected || state_ == kDisconnecting)
+	{
+		setState(kDisconnecting);
+		loop_->runAfter(
+			seconds,
+			makeWeakCallback(shared_from_this(),
+				&TcpConnection::forceClose));  // not forceCloseInLoop to avoid race condition
+	}
+	*/
+
+	if (state_ == kConnected || state_ == kDisconnecting)
+	{
+		setState(kDisconnecting);
+		loop_->queueInLoop(
+			boost::bind(&TcpConnection::forceCloseInLoop, shared_from_this()));//bind后面可用shared_from_this
+
+	}
+
+}
+
+
 
 void TcpConnection::setTcpNoDelay(bool on)
 {

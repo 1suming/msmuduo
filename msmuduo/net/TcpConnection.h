@@ -65,6 +65,11 @@ public:
 	//string getTcpInfoString() const;
 
 	//void send(string&& message); // C++11
+	//2022-02-12为了部分代码通过，必须实现send(string 方法)
+	void send(string& message) {
+		 
+		send(StringPiece(static_cast<const char*>(message.data()), message.size()));
+	}
 	void send(const void*message, int len);
 
 	//如果是loop thread,则直接发送，否则走runInLoop

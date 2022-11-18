@@ -31,6 +31,13 @@
     <ClCompile Include="fastcgi\fastcgi_test.cpp" />
     <ClCompile Include="memcached\server\Item.cpp" />
     <ClCompile Include="memcached\server\Session.cpp" />
+    <ClCompile Include="shorturl\shorturl.cpp" />
+    <ClCompile Include="maxconnection\echo.cpp" />
+    <ClCompile Include="maxconnection\main.cpp" />
+    <ClCompile Include="pingpong\server.cpp" />
+    <ClCompile Include="pingpong\client.cpp" />
+    <ClCompile Include="roundtrip\roundtrip.cpp" />
+    <ClCompile Include="0unittest\rbtree_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -67,6 +74,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="memcached\server\Session.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="maxconnection\echo.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

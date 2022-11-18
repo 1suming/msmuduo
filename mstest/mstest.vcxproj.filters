@@ -96,8 +96,17 @@
     <ClCompile Include="boost_any_test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="TCP_REUSEPORT_test.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TCP_REUSEPORT_client.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="container_of.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
     <ClCompile Include="ptr_vector.cpp">
-      <Filter>头文件</Filter>
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,5 +128,10 @@
     <ClInclude Include="AnyMy.hpp">
       <Filter>源文件</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TCP_REUSEPORT.makefile">
+      <Filter>源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>
