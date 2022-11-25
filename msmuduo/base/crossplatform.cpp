@@ -32,7 +32,21 @@ int gettimeofday(struct timeval *tp, void *tzp)
 	tp->tv_usec = wtm.wMilliseconds * 1000;
 	return (0);
 }
-
+void writePid()
+{
+	uint32_t curPid;
+#ifdef _WIN32
+	curPid = (uint32_t)GetCurrentProcess();
+#else
+	curPid = (uint32_t)getpid();
+#endif
+	FILE* f = fopen("server.pid", "w");
+	assert(f);
+	char szPid[32];
+	snprintf(szPid, sizeof(szPid), "%d", curPid);
+	fwrite(szPid, strlen(szPid), 1, f);
+	fclose(f);
+}
 
 
 #endif
