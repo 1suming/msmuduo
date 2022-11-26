@@ -8,11 +8,12 @@
 #include"msmuduo/net/Buffer.h"
 #include"msmuduo/net/InetAddress.h"
 #include"msmuduo/net/Channel.h"
+#include"msmuduo/base/noncopyable.h"
 
 #include<boost/scoped_ptr.hpp>
 #include<boost/shared_ptr.hpp>
 #include<boost/enable_shared_from_this.hpp>
-#include<boost/noncopyable.hpp>
+//#include<boost/noncopyable.hpp>
 #include<boost/any.hpp>
 
 
@@ -38,7 +39,7 @@ TcpConnection表示的“一次TCP连接”，他是不可再生的，一旦连接断开，这个TcpConnect
 //this is an interface class, so don't expose too much details.
 */
 
-class TcpConnection :boost::noncopyable,
+class TcpConnection :noncopyable,
 	public boost::enable_shared_from_this<TcpConnection>
 {
 public:
