@@ -38,6 +38,7 @@
     <ClCompile Include="pingpong\client.cpp" />
     <ClCompile Include="roundtrip\roundtrip.cpp" />
     <ClCompile Include="0unittest\rbtree_test.cpp" />
+    <ClCompile Include="asio\chat\server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -77,6 +78,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="maxconnection\echo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="asio\chat\codec.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

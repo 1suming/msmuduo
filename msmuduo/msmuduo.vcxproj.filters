@@ -59,6 +59,8 @@
     <ClInclude Include="util\hexdump.h" />
     <ClInclude Include="util\rbtree.h" />
     <ClInclude Include="util\FreeList.h" />
+    <ClInclude Include="base\FileConfReader.h" />
+    <ClInclude Include="base\noncopyable.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -133,6 +135,7 @@
     <ClCompile Include="util\hexdump.cpp" />
     <ClCompile Include="util\tests\hexdump_test.cpp" />
     <ClCompile Include="util\rbtree.cpp" />
+    <ClCompile Include="base\FileConfReader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt" />

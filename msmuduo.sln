@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "msuLibeventWrapper", "msuLi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "msNetTestRecipe", "msNetTestRecipe\msNetTestRecipe.vcxproj", "{07787C9F-064E-425D-9BEB-FD2C710EF13F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "msz_proj_db_proxy", "msz_proj_db_proxy\msz_proj_db_proxy.vcxproj", "{CB6A3ED2-0F86-45D6-A251-8FCEBB3992D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -53,6 +55,14 @@ Global
 		{07787C9F-064E-425D-9BEB-FD2C710EF13F}.Release|Win32.Build.0 = Release|Win32
 		{07787C9F-064E-425D-9BEB-FD2C710EF13F}.Release|x64.ActiveCfg = Release|x64
 		{07787C9F-064E-425D-9BEB-FD2C710EF13F}.Release|x64.Build.0 = Release|x64
+		{CB6A3ED2-0F86-45D6-A251-8FCEBB3992D2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CB6A3ED2-0F86-45D6-A251-8FCEBB3992D2}.Debug|Win32.Build.0 = Debug|Win32
+		{CB6A3ED2-0F86-45D6-A251-8FCEBB3992D2}.Debug|x64.ActiveCfg = Debug|x64
+		{CB6A3ED2-0F86-45D6-A251-8FCEBB3992D2}.Debug|x64.Build.0 = Debug|x64
+		{CB6A3ED2-0F86-45D6-A251-8FCEBB3992D2}.Release|Win32.ActiveCfg = Release|Win32
+		{CB6A3ED2-0F86-45D6-A251-8FCEBB3992D2}.Release|Win32.Build.0 = Release|Win32
+		{CB6A3ED2-0F86-45D6-A251-8FCEBB3992D2}.Release|x64.ActiveCfg = Release|x64
+		{CB6A3ED2-0F86-45D6-A251-8FCEBB3992D2}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
